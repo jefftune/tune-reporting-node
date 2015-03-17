@@ -1,5 +1,5 @@
 {
-   "tune_reporting_php_sdk": {
+   "tune_reporting_node_sdk": {
        "async": {
            "oss_licenses": [
                "MIT"
