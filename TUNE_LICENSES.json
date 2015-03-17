@@ -1,0 +1,166 @@
+{
+   "tune_reporting_php_sdk": {
+       "async": {
+           "oss_licenses": [
+               "MIT"
+           ],
+           "url": "https://www.npmjs.com/package/async",
+           "versions": [
+               "0.9.0"
+           ]
+       },
+       "events": {
+           "oss_licenses": [
+               "MIT"
+           ],
+           "url": "https://www.npmjs.com/package/events",
+           "versions": [
+               "1.2.0"
+           ]
+       },
+       "clone": {
+           "oss_licenses": [
+               "MIT"
+           ],
+           "url": "https://www.npmjs.com/package/clone",
+           "versions": [
+               "1.0.1"
+           ]
+       },
+       "chai": {
+           "oss_licenses": [
+               "MIT"
+           ],
+           "url": "https://www.npmjs.com/package/chai",
+           "versions": [
+               "2.1.2"
+           ]
+       },
+       "cli-table": {
+           "oss_licenses": [
+               "MIT"
+           ],
+           "url": "https://www.npmjs.com/package/cli-table",
+           "versions": [
+               "0.3.1"
+           ]
+       },
+       "colors": {
+           "oss_licenses": [
+               "MIT"
+           ],
+           "url": "https://www.npmjs.com/package/colors",
+           "versions": [
+               "1.0.3"
+           ]
+       },
+       "convict": {
+           "oss_licenses": [
+               "Apache-2.0"
+           ],
+           "url": "https://www.npmjs.com/package/convict",
+           "versions": [
+               "0.6.1"
+           ]
+       },
+       "jsdoc": {
+           "oss_licenses": [
+               "Apache 2.0"
+           ],
+           "url": "http://usejsdoc.org/about-license-jsdoc3.html",
+           "versions": [
+               "3.3.0"
+           ]
+       },
+       "jsuri": {
+           "oss_licenses": [
+               "BSD"
+           ],
+           "url": "https://github.com/derek-watson/jsUri/blob/master/LICENSE",
+           "versions": [
+               "1.3.0"
+           ]
+       },
+       "mocha": {
+           "oss_licenses": [
+               "MIT"
+           ],
+           "url": "https://www.npmjs.com/package/mocha",
+           "versions": [
+               "2.2.1"
+           ]
+       },
+       "node": {
+           "oss_licenses": [
+               "MIT"
+           ],
+           "url": "https://raw.githubusercontent.com/joyent/node/v0.12.0/LICENSE",
+           "versions": [
+               "0.10.33"
+           ]
+       },
+       "nodelint": {
+           "oss_licenses": [
+               "PD"
+           ],
+           "url": "https://www.npmjs.com/package/nodelint",
+           "versions": [
+               "0.6.2"
+           ]
+       },
+       "prettyjson": {
+           "oss_licenses": [
+               "MIT"
+           ],
+           "url": "https://github.com/rafeca/prettyjson/blob/master/LICENSE",
+           "versions": [
+               "1.1.0"
+           ]
+       },
+       "should": {
+           "oss_licenses": [
+               "MIT"
+           ],
+           "url": "https://www.npmjs.com/package/should",
+           "versions": [
+               "5.2.0"
+           ]
+       },
+       "sinon": {
+           "oss_licenses": [
+               "BSD"
+           ],
+           "url": "https://www.npmjs.com/package/sinon",
+           "versions": [
+               "1.14.1"
+           ]
+       },
+       "stack-trace": {
+           "oss_licenses": [
+               "BSD"
+           ],
+           "url": "https://github.com/felixge/node-stack-trace/blob/master/License",
+           "versions": [
+               "0.0.9"
+           ]
+       },
+       "util": {
+           "oss_licenses": [
+               "MIT"
+           ],
+           "url": "https://www.npmjs.com/package/util",
+           "versions": [
+               "0.10.3"
+           ]
+       },
+       "yuidoc": {
+           "oss_licenses": [
+               "BSD"
+           ],
+           "url": "https://github.com/yui/yuidoc/blob/master/LICENSE",
+           "versions": [
+               "0.6.0"
+           ]
+       }
+   }
+}
