@@ -1,8 +1,8 @@
 <h2>tune-reporting</h2>
 <h2>TUNE Reporting SDK for Node</h2>
 <h3>Incorporate TUNE Reporting services.</h3>
-<h4>Update:  $Date: 2015-01-20 14:17:43 $</h4>
-<h4>Version: 0.9.3</h4>
+<h4>Update:  $Date: 2015-04-05 13:42:19 $</h4>
+<h4>Version: 1.0.0</h4>
 ===
 
 <a id="TOP"></a>
@@ -473,10 +473,10 @@ lib/
 │   ├── index.js
 │   └── service
 │       ├── index.js
-│       ├── TuneManagementClient.js
-│       ├── TuneManagementQueryString.js
-│       ├── TuneManagementRequest.js
-│       └── TuneManagementResponse.js
+│       ├── TuneServiceClient.js
+│       ├── QueryStringBuilder.js
+│       ├── TuneServiceRequest.js
+│       └── TuneServiceResponse.js
 ├── helpers
 │   ├── Date.js
 │   ├── index.js
@@ -553,8 +553,8 @@ test/
 #### TUNE Advertiser Report Service Classes
 
 <ul>
-    <li><code>TuneManagementClient</code> - Connects with <a href="http://developers.mobileapptracking.com/management-api/" target="_blank">TUNE Advertiser Report Service</a></li>
-    <li><code>TuneManagementRequest</code> - Defines request to TUNE Advertiser Report Service containing:
+    <li><code>TuneServiceClient</code> - Connects with <a href="http://developers.mobileapptracking.com/management-api/" target="_blank">TUNE Advertiser Report Service</a></li>
+    <li><code>TuneServiceRequest</code> - Defines request to TUNE Advertiser Report Service containing:
         <ul>
             <li>Controller / Endpoint</li>
             <li>Action</li>
@@ -565,7 +565,7 @@ test/
             </li>
         </ul>
     </li>
-    <li><code>TuneManagementResponse</code> - Complete response from TUNE Advertiser Report Service containing:
+    <li><code>TuneServiceResponse</code> - Complete response from TUNE Advertiser Report Service containing:
         <ul>
             <li>Status Code</li>
             <li>Data</li>
@@ -622,34 +622,37 @@ Finds all existing records matching provided filter criteria and returns total c
 
 <!-- Node.js -->
 ```javascript
-    var advertiserReport = new AdvertiserReportLogClicks();
+    var
+      advertiserReport = new AdvertiserReportLogClicks(),
+      mapQueryString = {
+        'start_date': startDate,
+        'end_date': endDate,
+        'filter': null,
+        'response_timezone': strResponseTimezone
+      };
 
-    var count_request = advertiserReport.count(
-      startDate,
-      endDate,
-      null,                                           // filter
-      strResponseTimezone
-    );
-    count_request.once('success', function onSuccess(response) {
-      if ((response.getHttpCode() !== 200) || (response.getErrors() !== null)) {
-        next(response);
-      } else {
+    advertiserReport.count(
+      mapQueryString,
+      function (error, response) {
+        if (error) {
+          return next(error);
+        }
+
+        if ((response.getHttpCode() !== 200) || (response.getErrors() !== null)) {
+          return next(response);
+        }
+
         var count = response.getData();
 
-        console.log('\n');
         console.log(' Status: "success"');
-        console.log(' TuneManagementResponse:');
-        console.log(response.toString());
+        console.log(' TuneServiceResponse:');
+        console.log(response.toJson().responseJson.data);
 
         console.log('\n');
         console.log(util.format(' Count: %d', count));
-        next();
+        return next();
       }
-    });
-
-    count_request.once('error', function onError(response) {
-      return next(response);
-    });
+    );
 ```
 
 <a id="sdk_method_find" name="sdk_method_find"></a>
@@ -662,34 +665,36 @@ Gathers all existing records that match filter criteria and returns an array of 
 
 <!-- Node.js -->
 ```javascript
-    var advertiserReport = new AdvertiserReportLogClicks();
+    var
+      advertiserReport = new AdvertiserReportLogClicks(),
+      mapQueryString = {
+        'start_date': startDate,
+        'end_date': endDate,
+        'fields': arrayFieldsRecommended,
+        'filter': null,
+        'limit': 5,
+        'page': null,
+        'sort': { 'created': 'DESC' },
+        'response_timezone': strResponseTimezone
+      };
 
-    var find_request = advertiserReport.find(
-      startDate,
-      endDate,
-      fieldsRecommended,
-      null,                                           // filter
-      5,                                              // limit
-      null,                                           // page
-      { 'created': 'DESC' },                          // sort
-      strResponseTimezone
-    );
-    find_request.once('success', function onSuccess(response) {
-      if ((response.getHttpCode() !== 200) || (response.getErrors() !== null)) {
-        next(response);
-      } else {
+    advertiserReport.find(
+      mapQueryString,
+      function (error, response) {
+        if (error) {
+          return next(error);
+        }
 
-        console.log('\n');
+        if ((response.getHttpCode() !== 200) || (response.getErrors() !== null)) {
+          return next(response);
+        }
+
         console.log(' Status: "success"');
-        console.log(' TuneManagementResponse:');
-        console.log(response.toString());
-        next();
+        console.log(' TuneServiceResponse:');
+        console.log(response.toJson().responseJson.data);
+        return next();
       }
-    });
-
-    find_request.once('error', function onError(response) {
-      return next(response);
-    });
+    );
 ```
 
 <a id="sdk_method_export" name="sdk_method_export"></a>
@@ -702,37 +707,39 @@ Provides the same signature as function find(), accept parameters <code>limit</c
 
 <!-- Node.js -->
 ```javascript
-    var advertiserReport = new AdvertiserReportLogClicks();
+    var
+      advertiserReport = new AdvertiserReportLogClicks(),
+      mapQueryString = {
+        'start_date': startDate,
+        'end_date': endDate,
+        'fields': arrayFieldsRecommended,
+        'filter': null,
+        'format': 'json',
+        'response_timezone': strResponseTimezone
+      };
 
-    var export_request = advertiserReport.exportReport(
-      startDate,
-      endDate,
-      fieldsRecommended,
-      null,                                           // filter
-      'csv',                                          // format
-      strResponseTimezone
-    );
-    export_request.once('success', function onSuccess(response) {
-      if ((response.getHttpCode() !== 200) || (response.getErrors() !== null)) {
-        next(response);
-      } else {
+    advertiserReport.exportReport(
+      mapQueryString,
+      function (error, response) {
+        if (error) {
+          return next(error);
+        }
 
-        console.log('\n');
+        if ((response.getHttpCode() !== 200) || (response.getErrors() !== null)) {
+          return next(response);
+        }
+
         console.log(' Status: "success"');
-        console.log(' TuneManagementResponse:');
-        console.log(response.toString());
+        console.log(' TuneServiceResponse:');
+        console.log(response.toJson().responseJson.data);
 
-        csvJobId = advertiserReport.parseResponseReportJobId(response);
+        jsonJobId = response.toJson().responseJson.data;
 
         console.log('\n');
-        console.log(util.format(' CSV Report Job ID: "%s"', csvJobId));
-        next();
+        console.log(util.format(' JSON Report Job ID: "%s"', jsonJobId));
+        return next();
       }
-    });
-
-    export_request.once('error', function onError(response) {
-      return next(response);
-    });
+    );
 ```
 
 <a id="sdk_method_status" name="sdk_method_status"></a>
@@ -752,20 +759,20 @@ A helper function that creates a threaded worker that handles the status request
 
 <!-- Node.js -->
 ```javascript
-    var advertiserReport = new AdvertiserReportLogClicks();
+    var
+      advertiserReport = new AdvertiserReportLogClicks(),
+      requestFetch = advertiserReport.fetchReport(
+        csvJobId
+      );
 
-    var fetch_request = advertiserReport.fetchReport(
-      csvJobId
-    );
-
-    fetch_request.once('success', function onSuccess(response) {
+    requestFetch.once('success', function onSuccess(response) {
       if ((response.getHttpCode() !== 200) || (response.getErrors() !== null)) {
         next(response);
       } else {
 
         console.log('\n');
         console.log(' Status: "success"');
-        console.log(' TuneManagementResponse:');
+        console.log(' TuneServiceResponse:');
         console.log(response.toString());
 
         csvReportUrl = advertiserReport.parseResponseReportUrl(response);
@@ -777,7 +784,7 @@ A helper function that creates a threaded worker that handles the status request
       }
     });
 
-    fetch_request.once('error', function onError(response) {
+    requestFetch.once('error', function onError(response) {
       return next(response);
     });
 ```
@@ -800,7 +807,7 @@ Method <strong>fields()</strong> returns a listing of all the fields that can be
     fields_request.once('success', function onSuccess(response) {
       console.log('\n');
       console.log(' Status: "success"');
-      console.log(' TuneManagementResponse:');
+      console.log(' TuneServiceResponse:');
       console.log(response);
       fieldsRecommended = response;
       next();

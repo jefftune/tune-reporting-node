@@ -10,7 +10,7 @@
  * @author    Jeff Tanner <jefft@tune.com>
  * @copyright 2015 TUNE, Inc. (http://www.tune.com)
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
- * @version   $Date: 2015-01-20 14:17:43 $
+ * @version   $Date: 2015-04-05 13:42:19 $
  * @link      http://developers.mobileapptracking.com @endlink
  */
 "use strict";
@@ -86,6 +86,7 @@ try {
         }
 
         console.log(' Status: "success"');
+
         sessionToken = response.getData();
         console.log(' session_token:');
         console.log(sessionToken);
@@ -121,26 +122,33 @@ try {
       console.log('==========================================================');
       console.log('\n');
 
+      var
+        mapQueryString = {
+          'start_date': startDate,
+          'end_date': endDate,
+          'group': 'site_id,publisher_id',
+          'filter': '(publisher_id > 0)',
+          'response_timezone': strResponseTimezone
+        };
+
       advertiserReport.count(
-        startDate,
-        endDate,
-        'site_id,publisher_id',                         // group
-        '(publisher_id > 0)',                           // filter
-        strResponseTimezone,
+        mapQueryString,
         function (error, response) {
           if (error) {
             return next(error);
           }
 
-          if ((response.getHttpCode() !== 200) || (response.getErrors() !== null)) {
+          if ((response.getHttpCode() !== 200) ||
+            (response.getErrors() !== null)
+          ) {
             return next(response);
           }
 
           var count = response.getData();
 
           console.log(' Status: "success"');
-          console.log(' TuneManagementResponse:');
-          console.log(response.toJson());
+          console.log(' TuneServiceResponse:');
+          console.log(response.toJson().responseJson.data);
 
           console.log('\n');
           console.log(util.format(' Count: %d', count));
@@ -155,17 +163,22 @@ try {
       console.log('==========================================================');
       console.log('\n');
 
+      var
+        mapQueryString = {
+          'start_date': startDate,
+          'end_date': endDate,
+          'fields': arrayFieldsRecommended,
+          'group': 'site_id,publisher_id',
+          'filter': '(publisher_id > 0)',
+          'limit': 5,
+          'page': null,
+          'sort': { 'paid_installs': 'DESC' },
+          'timestamp': 'datehour',
+          'response_timezone': strResponseTimezone
+        };
+
       advertiserReport.find(
-        startDate,
-        endDate,
-        arrayFieldsRecommended,                         // fields
-        'site_id,publisher_id',                         // group
-        '(publisher_id > 0)',                           // filter
-        5,                                              // limit
-        null,                                           // page
-        { 'paid_installs': 'DESC' },                    // sort
-        'datehour',                                     // timestamp
-        strResponseTimezone,
+        mapQueryString,
         function (error, response) {
           if (error) {
             return next(error);
@@ -193,17 +206,22 @@ try {
       console.log('==========================================================');
       console.log('\n');
 
+      var
+        mapQueryString = {
+          'start_date': startDate,
+          'end_date': endDate,
+          'fields': arrayFieldsRecommended,
+          'group': 'site_id,publisher_id',
+          'filter': null,
+          'limit': 5,
+          'page': null,
+          'sort': { 'paid_installs': 'DESC' },
+          'timestamp': 'datehour',
+          'response_timezone': strResponseTimezone
+        };
+
       advertiserReport.find(
-        startDate,
-        endDate,
-        arrayFieldsRecommended,                             // fields
-        'site_id,publisher_id',                             // group
-        '(ad_network_id = 938) AND (publisher_id = 877)',   // filter
-        5,                                                  // limit
-        null,                                               // page
-        { 'paid_installs': 'DESC' },                        // sort
-        'datehour',                                         // timestamp
-        strResponseTimezone,
+        mapQueryString,
         function (error, response) {
           if (error) {
             return next(error);
@@ -242,19 +260,22 @@ try {
           'payouts',
           'revenues_usd',
           'publisher_sub_campaign.ref'
-        ];
+        ],
+        mapQueryString = {
+          'start_date': startDate,
+          'end_date': endDate,
+          'fields': fields,
+          'group': 'site_id,publisher_id',
+          'filter': '(publisher_id > 0)',
+          'limit': 5,
+          'page': null,
+          'sort': { 'installs': 'DESC' },
+          'timestamp': 'datehour',
+          'response_timezone': 'UTC'
+        };
 
       advertiserReport.find(
-        startDate,
-        endDate,
-        fields,                                                         // fields
-        'site_id,publisher_id',                                         // group
-        "(publisher_id > 0) AND (publisher.name = 'App Alliances')",    // filter
-        5,                                                              // limit
-        null,                                                           // page
-        { 'installs': 'DESC' },                                         // sort
-        'datehour',                                                     // timestamp
-        'UTC',                                                          // response_timezone
+        mapQueryString,
         function (error, response) {
           if (error) {
             return next(error);
@@ -294,20 +315,21 @@ try {
           'opens',
           'revenues_usd'
         ],
-        filter = "(publisher_id > 0) AND (publisher.name = 'App Alliances') AND (publisher_sub_ad.ref = 48)",
-        group = 'site_id,publisher_id,publisher_sub_ad_ref';
+        mapQueryString = {
+          'start_date': startDate,
+          'end_date': endDate,
+          'fields': fields,
+          'group': 'site_id,publisher_id,publisher_sub_ad_ref',
+          'filter': '(publisher_id > 0)',
+          'limit': 5,
+          'page': null,
+          'sort': { 'installs': 'DESC' },
+          'timestamp': 'datehour',
+          'response_timezone': 'UTC'
+        };
 
       advertiserReport.find(
-        startDate,
-        endDate,
-        fields,                                                         // fields
-        group,                                                          // group
-        filter,                                                         // filter
-        5,                                                              // limit
-        null,                                                           // page
-        { 'installs': 'DESC' },                                         // sort
-        'datehour',                                                     // timestamp
-        'UTC',                                                          // response_timezone
+        mapQueryString,
         function (error, response) {
           if (error) {
             return next(error);
@@ -334,15 +356,20 @@ try {
       console.log('==========================================================');
       console.log('\n');
 
+      var
+        mapQueryString = {
+          'start_date': startDate,
+          'end_date': endDate,
+          'fields': arrayFieldsRecommended,
+          'group': 'site_id,publisher_id',
+          'filter': '(publisher_id > 0)',
+          'format': 'csv',
+          'timestamp': 'datehour',
+          'response_timezone': strResponseTimezone
+        };
+
       advertiserReport.exportReport(
-        startDate,
-        endDate,
-        arrayFieldsRecommended,                         // fields
-        'site_id,publisher_id',                         // group
-        '(publisher_id > 0)',                           // filter
-        'datehour',                                     // timestamp
-        'csv',                                          // format
-        strResponseTimezone,
+        mapQueryString,
         function (error, response) {
           if (error) {
             return next(error);
@@ -414,7 +441,7 @@ try {
           }
 
           console.log(' Status: "success"');
-          console.log(' TuneManagementResponse:');
+          console.log(' TuneServiceResponse:');
           console.log(response.toJson().responseJson.data);
 
           if (100 === response.toJson().responseJson.data.percent_complete) {
@@ -465,15 +492,20 @@ try {
 
       jsonJobId = undefined;
 
+      var
+        mapQueryString = {
+          'start_date': startDate,
+          'end_date': endDate,
+          'fields': arrayFieldsRecommended,
+          'group': 'site_id,publisher_id',
+          'filter': '(publisher_id > 0)',
+          'format': 'json',
+          'timestamp': 'datehour',
+          'response_timezone': strResponseTimezone
+        };
+
       advertiserReport.exportReport(
-        startDate,
-        endDate,
-        arrayFieldsRecommended,                         // fields
-        'site_id,publisher_id',                         // group
-        '(publisher_id > 0)',                           // filter
-        'datehour',                                     // timestamp
-        'json',                                         // format
-        strResponseTimezone,
+        mapQueryString,
         function (error, response) {
           if (error) {
             return next(error);
@@ -484,7 +516,7 @@ try {
           }
 
           console.log(' Status: "success"');
-          console.log(' TuneManagementResponse:');
+          console.log(' TuneServiceResponse:');
           console.log(response.toJson().responseJson.data);
 
           jsonJobId = response.toJson().responseJson.data;
@@ -540,7 +572,7 @@ try {
             return next(response);
           }
           console.log(' Status: "success"');
-          console.log(' TuneManagementResponse:');
+          console.log(' TuneServiceResponse:');
           console.log(response.toJson().responseJson.data);
 
           if (100 === response.toJson().responseJson.data.percent_complete) {
@@ -593,12 +625,17 @@ try {
       config.set('tune.reporting.auth_key', sessionToken);
       config.set('tune.reporting.auth_type', 'session_token');
 
+      var
+        mapQueryString = {
+          'start_date': startDate,
+          'end_date': endDate,
+          'group': 'site_id,publisher_id',
+          'filter': '(publisher_id > 0)',
+          'response_timezone': strResponseTimezone
+        };
+
       advertiserReport.count(
-        startDate,
-        endDate,
-        'site_id,publisher_id',                         // group
-        '(publisher_id > 0)',                           // filter
-        strResponseTimezone,
+        mapQueryString,
         function (error, response) {
           if (error) {
             return next(error);
@@ -611,7 +648,7 @@ try {
           var count = response.getData();
 
           console.log(' Status: "success"');
-          console.log(' TuneManagementResponse:');
+          console.log(' TuneServiceResponse:');
           console.log(response.toJson());
 
           console.log('\n');

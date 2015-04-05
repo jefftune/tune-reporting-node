@@ -1,6 +1,6 @@
 #   Makefile
 #
-#   Copyright (c) 2014 TUNE, Inc.
+#   Copyright (c) 2015 TUNE, Inc.
 #   All rights reserved.
 #
 #   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -26,7 +26,7 @@
 # author    Jeff Tanner <jefft@tune.com>
 # copyright 2014 TUNE, Inc. (http://www.tune.com)
 # license   http://opensource.org/licenses/MIT The MIT License (MIT)
-# version   $Date: 2015-01-20 14:17:43 $
+# version   $Date: 2015-04-05 13:42:19 $
 # link      http://developers.mobileapptracking.com/tune-api-sdks/
 #
 

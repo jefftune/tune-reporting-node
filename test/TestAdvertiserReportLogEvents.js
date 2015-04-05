@@ -11,7 +11,7 @@
  * @author    Jeff Tanner <jefft@tune.com>
  * @copyright 2015 TUNE, Inc. (http://www.tune.com)
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
- * @version   $Date: 2015-01-07 18:08:35 $
+ * @version   $Date: 2015-04-05 13:42:19 $
  * @link      http://developers.mobileapptracking.com @endlink
  */
 "use strict";
@@ -35,7 +35,7 @@ describe('test AdvertiserReportLogEvents', function () {
     startDate = new Date().setYesterday().setStartTime().getIsoDateTime(),
     endDate = new Date().setYesterday().setEndTime().getIsoDateTime(),
     strResponseTimezone = 'America/Los_Angeles',
-    fieldsRecommended = null;
+    arrayFieldsRecommended = null;
 
   before(function () {
     apiKey = process.env.API_KEY;
@@ -50,19 +50,25 @@ describe('test AdvertiserReportLogEvents', function () {
       function (error, response) {
         expect(error).to.be.null;
         expect(response).to.be.not.null;
-        fieldsRecommended = response;
-        expect(fieldsRecommended).to.be.not.empty;
+        arrayFieldsRecommended = response;
+        expect(arrayFieldsRecommended).to.be.not.empty;
         done();
       }
     );
   });
 
   it('count', function (done) {
+
+    var
+      mapQueryString = {
+        'start_date': startDate,
+        'end_date': endDate,
+        'filter': null,
+        'response_timezone': strResponseTimezone
+      };
+
     advertiserReport.count(
-      startDate,
-      endDate,
-      null,                                           // filter
-      strResponseTimezone,
+      mapQueryString,
       function (error, response) {
         expect(error).to.be.null;
         expect(response).to.be.not.null;
@@ -73,15 +79,21 @@ describe('test AdvertiserReportLogEvents', function () {
   });
 
   it('find', function (done) {
+
+    var
+      mapQueryString = {
+        'start_date': startDate,
+        'end_date': endDate,
+        'fields': arrayFieldsRecommended,
+        'filter': null,
+        'limit': 5,
+        'page': null,
+        'sort': { 'created': 'DESC' },
+        'response_timezone': strResponseTimezone
+      };
+
     advertiserReport.find(
-      startDate,
-      endDate,
-      fieldsRecommended,
-      null,                                           // filter
-      5,                                              // limit
-      null,                                           // page
-      { 'created': 'DESC' },                          // sort
-      strResponseTimezone,
+      mapQueryString,
       function (error, response) {
         expect(error).to.be.null;
         expect(response).to.be.not.null;
@@ -93,13 +105,19 @@ describe('test AdvertiserReportLogEvents', function () {
   });
 
   it('exportReport CSV', function (done) {
+
+    var
+      mapQueryString = {
+        'start_date': startDate,
+        'end_date': endDate,
+        'fields': arrayFieldsRecommended,
+        'filter': null,
+        'format': 'csv',
+        'response_timezone': strResponseTimezone
+      };
+
     advertiserReport.exportReport(
-      startDate,
-      endDate,
-      fieldsRecommended,
-      null,                                           // filter
-      'csv',                                          // format
-      strResponseTimezone,
+      mapQueryString,
       function (error, response) {
         expect(error).to.be.null;
         expect(response).to.be.not.null;

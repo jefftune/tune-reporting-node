@@ -10,7 +10,7 @@
  * @author    Jeff Tanner <jefft@tune.com>
  * @copyright 2015 TUNE, Inc. (http://www.tune.com)
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
- * @version   $Date: 2015-01-20 14:17:43 $
+ * @version   $Date: 2015-04-05 13:42:19 $
  * @link      http://developers.mobileapptracking.com @endlink
  */
 "use strict";
@@ -121,14 +121,19 @@ try {
       console.log('==========================================================');
       console.log('\n');
 
+      var
+        mapQueryString = {
+          'start_date': startDate,
+          'end_date': endDate,
+          'cohort_type': 'click',
+          'interval': 'year_day',
+          'group': 'site_id,install_publisher_id',
+          'filter': '(install_publisher_id > 0)',
+          'response_timezone': strResponseTimezone
+        };
+
       advertiserReport.count(
-        startDate,
-        endDate,
-        'click',                                        // cohortType
-        'year_day',                                     // cohortInterval
-        'site_id,install_publisher_id',                 // group
-        '(install_publisher_id > 0)',                   // filter
-        strResponseTimezone,
+        mapQueryString,
         function (error, response) {
           if (error) {
             return next(error);
@@ -159,18 +164,24 @@ try {
       console.log('==========================================================');
       console.log('\n');
 
+      var
+        mapQueryString = {
+          'start_date': startDate,
+          'end_date': endDate,
+          'cohort_type': 'click',
+          'interval': 'year_day',
+          'aggregation_type': 'cumulative',
+          'group': 'site_id,install_publisher_id',
+          'fields': arrayFieldsRecommended,
+          'filter': '(install_publisher_id > 0)',
+          'limit': 5,
+          'page': null,
+          'sort': null,
+          'response_timezone': strResponseTimezone
+        };
+
       advertiserReport.find(
-        startDate,
-        endDate,
-        'click',                                        // cohortType
-        'year_day',                                     // cohortInterval
-        arrayFieldsRecommended,                         // fields
-        'site_id,install_publisher_id',                 // group
-        '(install_publisher_id > 0)',                   // filter
-        5,                                              // limit
-        null,                                           // page
-        null,                                           // sort
-        strResponseTimezone,
+        mapQueryString,
         function (error, response) {
           if (error) {
             return next(error);
@@ -196,15 +207,22 @@ try {
       console.log(' Export Advertiser Report Cohort Retention CSV report.    ');
       console.log('==========================================================');
       console.log('\n');
+
+      var
+        mapQueryString = {
+          'start_date': startDate,
+          'end_date': endDate,
+          'cohort_type': 'click',
+          'interval': 'year_day',
+          'aggregation_type': 'cumulative',
+          'group': 'site_id,install_publisher_id',
+          'fields': arrayFieldsRecommended,
+          'filter': '(install_publisher_id > 0)',
+          'response_timezone': strResponseTimezone
+        };
+
       advertiserReport.exportReport(
-        startDate,
-        endDate,
-        'click',                                        // cohortType
-        'year_day',                                     // cohortInterval
-        arrayFieldsRecommended,                         // fields
-        'site_id,install_publisher_id',                 // group
-        '(install_publisher_id > 0)',                   // filter
-        strResponseTimezone,
+        mapQueryString,
         function (error, response) {
           if (error) {
             return next(error);
@@ -280,7 +298,7 @@ try {
           }
 
           console.log(' Status: "success"');
-          console.log(' TuneManagementResponse:');
+          console.log(' TuneServiceResponse:');
           console.log(response.toJson().responseJson.data);
 
           if (100 === response.toJson().responseJson.data.percent_complete) {
@@ -333,14 +351,19 @@ try {
       config.set('tune.reporting.auth_key', sessionToken);
       config.set('tune.reporting.auth_type', 'session_token');
 
+      var
+        mapQueryString = {
+          'start_date': startDate,
+          'end_date': endDate,
+          'cohort_type': 'click',
+          'interval': 'year_day',
+          'group': 'site_id,install_publisher_id',
+          'filter': '(install_publisher_id > 0)',
+          'response_timezone': strResponseTimezone
+        };
+
       advertiserReport.count(
-        startDate,
-        endDate,
-        'click',                                        // cohortType
-        'year_day',                                     // cohortInterval
-        'site_id,install_publisher_id',                 // group
-        '(install_publisher_id > 0)',                   // filter
-        strResponseTimezone,
+        mapQueryString,
         function (error, response) {
           if (error) {
             return next(error);

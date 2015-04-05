@@ -10,7 +10,7 @@
  * @author    Jeff Tanner <jefft@tune.com>
  * @copyright 2015 TUNE, Inc. (http://www.tune.com)
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
- * @version   $Date: 2015-01-20 14:17:43 $
+ * @version   $Date: 2015-04-05 13:42:19 $
  * @link      http://developers.mobileapptracking.com @endlink
  */
 "use strict";
@@ -24,11 +24,11 @@ var
   stackTrace = require('stack-trace'),
   async = require('async'),
   AdvertiserReportLogInstalls = tuneReporting.api.AdvertiserReportLogInstalls,
-  SessionAuthenticate = tuneReporting.api.SessionAuthenticate,
   EndpointBase = tuneReporting.base.endpoints.EndpointBase,
   InvalidArgument = tuneReporting.helpers.InvalidArgument,
   ReportReaderCSV = tuneReporting.helpers.ReportReaderCSV,
   ReportReaderJSON = tuneReporting.helpers.ReportReaderJSON,
+  SessionAuthenticate = tuneReporting.api.SessionAuthenticate,
   response;
 
 require('../lib/helpers/Date');
@@ -107,8 +107,9 @@ try {
             return next(error);
           }
 
+          console.log('\n');
           console.log(' Status: "success"');
-          console.log(' TuneManagementResponse:');
+          console.log(' TuneServiceResponse:');
           console.log(response);
           arrayFieldsRecommended = response;
           return next();
@@ -122,11 +123,16 @@ try {
       console.log('==========================================================');
       console.log('\n');
 
+      var
+        mapQueryString = {
+          'start_date': startDate,
+          'end_date': endDate,
+          'filter': null,
+          'response_timezone': strResponseTimezone
+        };
+
       advertiserReport.count(
-        startDate,
-        endDate,
-        null,                                           // filter
-        strResponseTimezone,
+        mapQueryString,
         function (error, response) {
           if (error) {
             return next(error);
@@ -139,7 +145,7 @@ try {
           var count = response.getData();
 
           console.log(' Status: "success"');
-          console.log(' TuneManagementResponse:');
+          console.log(' TuneServiceResponse:');
           console.log(response.toJson());
 
           console.log('\n');
@@ -155,15 +161,20 @@ try {
       console.log('==========================================================');
       console.log('\n');
 
+      var
+        mapQueryString = {
+          'start_date': startDate,
+          'end_date': endDate,
+          'fields': arrayFieldsRecommended,
+          'filter': null,
+          'limit': 5,
+          'page': null,
+          'sort': { 'created': 'DESC' },
+          'response_timezone': strResponseTimezone
+        };
+
       advertiserReport.find(
-        startDate,
-        endDate,
-        arrayFieldsRecommended,                         // fields
-        null,                                           // filter
-        5,                                              // limit
-        null,                                           // page
-        { 'created': 'DESC' },                          // sort
-        strResponseTimezone,
+        mapQueryString,
         function (error, response) {
           if (error) {
             return next(error);
@@ -174,7 +185,7 @@ try {
           }
 
           console.log(' Status: "success"');
-          console.log(' TuneManagementResponse:');
+          console.log(' TuneServiceResponse:');
           console.log(response.toJson().responseJson.data);
           return next();
         }
@@ -187,13 +198,18 @@ try {
       console.log('==========================================================');
       console.log('\n');
 
+      var
+        mapQueryString = {
+          'start_date': startDate,
+          'end_date': endDate,
+          'fields': arrayFieldsRecommended,
+          'filter': null,
+          'format': 'csv',
+          'response_timezone': strResponseTimezone
+        };
+
       advertiserReport.exportReport(
-        startDate,
-        endDate,
-        arrayFieldsRecommended,                         // fields
-        null,                                           // filter
-        'csv',                                          // format
-        strResponseTimezone,
+        mapQueryString,
         function (error, response) {
           if (error) {
             return next(error);
@@ -204,7 +220,7 @@ try {
           }
 
           console.log(' Status: "success"');
-          console.log(' TuneManagementResponse:');
+          console.log(' TuneServiceResponse:');
           console.log(response.toJson().responseJson.data);
 
           csvJobId = response.toJson().responseJson.data;
@@ -262,7 +278,7 @@ try {
           }
 
           console.log(' Status: "success"');
-          console.log(' TuneManagementResponse:');
+          console.log(' TuneServiceResponse:');
           console.log(response.toJson().responseJson.data);
 
           if (100 === response.toJson().responseJson.data.percent_complete) {
@@ -313,13 +329,18 @@ try {
 
       jsonJobId = undefined;
 
+      var
+        mapQueryString = {
+          'start_date': startDate,
+          'end_date': endDate,
+          'fields': arrayFieldsRecommended,
+          'filter': null,
+          'format': 'json',
+          'response_timezone': strResponseTimezone
+        };
+
       advertiserReport.exportReport(
-        startDate,
-        endDate,
-        arrayFieldsRecommended,                         // fields
-        null,                                           // filter
-        'json',                                         // format
-        strResponseTimezone,
+        mapQueryString,
         function (error, response) {
           if (error) {
             return next(error);
@@ -330,7 +351,7 @@ try {
           }
 
           console.log(' Status: "success"');
-          console.log(' TuneManagementResponse:');
+          console.log(' TuneServiceResponse:');
           console.log(response.toJson().responseJson.data);
 
           jsonJobId = response.toJson().responseJson.data;
@@ -388,7 +409,7 @@ try {
           }
 
           console.log(' Status: "success"');
-          console.log(' TuneManagementResponse:');
+          console.log(' TuneServiceResponse:');
           console.log(response.toJson().responseJson.data);
 
           if (100 === response.toJson().responseJson.data.percent_complete) {
@@ -429,7 +450,6 @@ try {
       } else {
         console.log(' Failed to fetch JSON Report URL.');
       }
-
     },
     taskCountSessionToken: function (next) {
       console.log('\n');
@@ -441,11 +461,16 @@ try {
       config.set('tune.reporting.auth_key', sessionToken);
       config.set('tune.reporting.auth_type', 'session_token');
 
+      var
+        mapQueryString = {
+          'start_date': startDate,
+          'end_date': endDate,
+          'filter': null,
+          'response_timezone': strResponseTimezone
+        };
+
       advertiserReport.count(
-        startDate,
-        endDate,
-        null,                                           // filter
-        strResponseTimezone,
+        mapQueryString,
         function (error, response) {
           if (error) {
             return next(error);
@@ -458,8 +483,8 @@ try {
           var count = response.getData();
 
           console.log(' Status: "success"');
-          console.log(' TuneManagementResponse:');
-          console.log(response.toJson());
+          console.log(' TuneServiceResponse:');
+          console.log(response.toJson().responseJson.data);
 
           console.log('\n');
           console.log(util.format(' Count: %d', count));
