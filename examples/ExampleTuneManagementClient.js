@@ -23,14 +23,14 @@ var
   async = require('async'),
   stackTrace = require('stack-trace'),
   SessionAuthenticate = tuneReporting.api.SessionAuthenticate,
-  TuneManagementClient = tuneReporting.base.service.TuneManagementClient,
+  TuneServiceClient = tuneReporting.base.service.TuneServiceClient,
   InvalidArgument = tuneReporting.helpers.InvalidArgument,
   client;
 
 function conclude(status, response) {
   console.log('\n');
   console.log(' Status: "' + status + '"');
-  console.log(' TuneManagementResponse:');
+  console.log(' TuneServiceResponse:');
   console.log(response.toString());
 }
 
@@ -41,7 +41,7 @@ try {
     authType = config.get('tune.reporting.auth_type'),
     sessionAuthenticate = new SessionAuthenticate(),
     sessionToken,
-    client = new TuneManagementClient(
+    client = new TuneServiceClient(
       'account/users',
       'find',
       authKey,
@@ -86,7 +86,7 @@ try {
         }
 
         console.log(' Status: "success"');
-        console.log(' TuneManagementResponse:');
+        console.log(' TuneServiceResponse:');
         console.log(response.toJson().responseJson.data);
 
         sessionToken = response.toJson().responseJson.data;
@@ -111,7 +111,7 @@ try {
           } else {
             console.log('\n');
             console.log(' Callback: "success"');
-            console.log(' TuneManagementResponse:');
+            console.log(' TuneServiceResponse:');
             console.log(response.toJson());
             next();
           }
@@ -130,7 +130,7 @@ try {
       clientRequest.on('success', function onSuccess(response) {
         console.log('\n');
         console.log(' Event: "success"');
-        console.log(' TuneManagementResponse:');
+        console.log(' TuneServiceResponse:');
         console.log(response.toJson().responseJson.data);
         next();
       });
@@ -157,7 +157,7 @@ try {
       clientRequest.on('success', function onSuccess(response) {
         console.log('\n');
         console.log(' Event: "success"');
-        console.log(' TuneManagementResponse:');
+        console.log(' TuneServiceResponse:');
         console.log(response.toJson().responseJson.data);
         next();
       });
@@ -183,7 +183,7 @@ try {
       if (err) {
         console.log('\n');
         console.log(' Status: "error"'.red);
-        console.log(' TuneManagementResponse:');
+        console.log(' TuneServiceResponse:');
         console.log(err);
       }
     });

@@ -11,7 +11,7 @@
  * @author    Jeff Tanner <jefft@tune.com>
  * @copyright 2015 TUNE, Inc. (http://www.tune.com)
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
- * @version   $Date: 2015-01-20 14:17:43 $
+ * @version   $Date: 2015-04-05 13:42:19 $
  * @link      http://developers.mobileapptracking.com @endlink
  */
 "use strict";
@@ -38,7 +38,7 @@ describe('test AdvertiserReportCohortRetention', function () {
     endDate = new Date().setYesterday().setEndTime().getIsoDateTime(),
 
     strResponseTimezone = 'America/Los_Angeles',
-    fieldsRecommended = null;
+    arrayFieldsRecommended = null;
 
   before(function () {
     apiKey = process.env.API_KEY;
@@ -53,22 +53,28 @@ describe('test AdvertiserReportCohortRetention', function () {
       function (error, response) {
         expect(error).to.be.null;
         expect(response).to.be.not.null;
-        fieldsRecommended = response;
-        expect(fieldsRecommended).to.be.not.empty;
+        arrayFieldsRecommended = response;
+        expect(arrayFieldsRecommended).to.be.not.empty;
         done();
       }
     );
   });
 
   it('count', function (done) {
+
+    var
+      mapQueryString = {
+        'start_date': startDate,
+        'end_date': endDate,
+        'cohort_type': 'click',
+        'interval': 'year_day',
+        'filter': '(install_publisher_id > 0)',
+        'group': 'site_id,install_publisher_id',
+        'response_timezone': strResponseTimezone
+      };
+
     advertiserReport.count(
-      startDate,
-      endDate,
-      'click',                                        // cohortType
-      'year_day',                                     // cohortInterval
-      'site_id,install_publisher_id',                 // group
-      '(install_publisher_id > 0)',                   // filter
-      strResponseTimezone,
+      mapQueryString,
       function (error, response) {
         expect(error).to.be.null;
         expect(response).to.be.not.null;
@@ -79,20 +85,26 @@ describe('test AdvertiserReportCohortRetention', function () {
   });
 
   it('find', function (done) {
-    expect(fieldsRecommended).to.be.not.null;
-    expect(fieldsRecommended).to.be.not.empty;
+    expect(arrayFieldsRecommended).to.be.not.null;
+    expect(arrayFieldsRecommended).to.be.not.empty;
+
+    var
+      mapQueryString = {
+        'start_date': startDate,
+        'end_date': endDate,
+        'fields': arrayFieldsRecommended,
+        'group': 'site_id,install_publisher_id',
+        'filter': '(install_publisher_id > 0)',
+        'limit': 5,
+        'page': null,
+        'sort': null,
+        'cohort_type': 'click',
+        'interval': 'year_day',
+        'response_timezone': strResponseTimezone
+      };
+
     advertiserReport.find(
-      startDate,
-      endDate,
-      'click',                                        // cohortType
-      'year_day',                                     // cohortInterval
-      fieldsRecommended,                              // fields
-      'site_id,install_publisher_id',                 // group
-      '(install_publisher_id > 0)',                   // filter
-      5,                                              // limit
-      null,                                           // page
-      null,                                           // sort
-      strResponseTimezone,
+      mapQueryString,
       function (error, response) {
         expect(error).to.be.null;
         expect(response).to.be.not.null;
@@ -103,15 +115,21 @@ describe('test AdvertiserReportCohortRetention', function () {
   });
 
   it('exportReport CSV', function (done) {
+
+    var
+      mapQueryString = {
+        'start_date': startDate,
+        'end_date': endDate,
+        'fields': arrayFieldsRecommended,
+        'group': 'site_id,install_publisher_id',
+        'filter': '(install_publisher_id > 0)',
+        'cohort_type': 'click',
+        'interval': 'year_day',
+        'response_timezone': strResponseTimezone
+      };
+
     advertiserReport.exportReport(
-      startDate,
-      endDate,
-      'click',                                        // cohortType
-      'year_day',                                     // cohortInterval
-      fieldsRecommended,                             // fields
-      'site_id,install_publisher_id',                 // group
-      '(install_publisher_id > 0)',                   // filter
-      strResponseTimezone,
+      mapQueryString,
       function (error, response) {
         expect(error).to.be.null;
         expect(response).to.be.not.null;

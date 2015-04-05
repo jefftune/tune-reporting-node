@@ -20,8 +20,8 @@ var
   config = require('../config.js'),
   tuneReporting = require('../lib'),
   SessionAuthenticate = tuneReporting.api.SessionAuthenticate,
-  TuneManagementClient = tuneReporting.base.service.TuneManagementClient,
-  TuneManagementRequest = tuneReporting.base.service.TuneManagementRequest,
+  TuneServiceClient = tuneReporting.base.service.TuneServiceClient,
+  TuneServiceRequest = tuneReporting.base.service.TuneServiceRequest,
   _ = require('lodash'),
   util = require('util'),
   async = require('async'),
@@ -34,7 +34,7 @@ var
   callbackSpy,
   clock;
 
-describe('test TuneManagementClient', function () {
+describe('test TuneServiceClient', function () {
   var
     apiKey,
     client = undefined;
@@ -43,7 +43,7 @@ describe('test TuneManagementClient', function () {
     apiKey = process.env.TUNE_REPORTING_API_KEY;
     config.set('tune.reporting.auth_key', apiKey);
     config.set('tune.reporting.auth_type', 'api_key');
-    client = new TuneManagementClient(
+    client = new TuneServiceClient(
       'account/users',
       'find',
       apiKey,
