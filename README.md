@@ -1,8 +1,8 @@
 <h2>tune-reporting</h2>
 <h2>TUNE Reporting SDK for Node</h2>
 <h3>Incorporate TUNE Reporting services.</h3>
-<h4>Update:  $Date: 2015-04-05 13:42:19 $</h4>
-<h4>Version: 1.0.0</h4>
+<h4>Update:  $Date: 2015-04-07 15:04:18 $</h4>
+<h4>Version: 1.0.1</h4>
 ===
 
 <a id="TOP"></a>
@@ -624,7 +624,7 @@ Finds all existing records matching provided filter criteria and returns total c
 ```javascript
     var
       advertiserReport = new AdvertiserReportLogClicks(),
-      mapQueryString = {
+      mapParams = {
         'start_date': startDate,
         'end_date': endDate,
         'filter': null,
@@ -632,7 +632,7 @@ Finds all existing records matching provided filter criteria and returns total c
       };
 
     advertiserReport.count(
-      mapQueryString,
+      mapParams,
       function (error, response) {
         if (error) {
           return next(error);
@@ -667,7 +667,7 @@ Gathers all existing records that match filter criteria and returns an array of 
 ```javascript
     var
       advertiserReport = new AdvertiserReportLogClicks(),
-      mapQueryString = {
+      mapParams = {
         'start_date': startDate,
         'end_date': endDate,
         'fields': arrayFieldsRecommended,
@@ -679,7 +679,7 @@ Gathers all existing records that match filter criteria and returns an array of 
       };
 
     advertiserReport.find(
-      mapQueryString,
+      mapParams,
       function (error, response) {
         if (error) {
           return next(error);
@@ -709,7 +709,7 @@ Provides the same signature as function find(), accept parameters <code>limit</c
 ```javascript
     var
       advertiserReport = new AdvertiserReportLogClicks(),
-      mapQueryString = {
+      mapParams = {
         'start_date': startDate,
         'end_date': endDate,
         'fields': arrayFieldsRecommended,
@@ -718,8 +718,8 @@ Provides the same signature as function find(), accept parameters <code>limit</c
         'response_timezone': strResponseTimezone
       };
 
-    advertiserReport.exportReport(
-      mapQueryString,
+    advertiserReport.export(
+      mapParams,
       function (error, response) {
         if (error) {
           return next(error);
@@ -761,7 +761,7 @@ A helper function that creates a threaded worker that handles the status request
 ```javascript
     var
       advertiserReport = new AdvertiserReportLogClicks(),
-      requestFetch = advertiserReport.fetchReport(
+      requestFetch = advertiserReport.fetch(
         csvJobId
       );
 

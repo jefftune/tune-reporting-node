@@ -11,7 +11,7 @@
  * @author    Jeff Tanner <jefft@tune.com>
  * @copyright 2015 TUNE, Inc. (http://www.tune.com)
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
- * @version   $Date: 2015-04-05 13:42:19 $
+ * @version   $Date: 2015-04-07 15:04:18 $
  * @link      http://developers.mobileapptracking.com @endlink
  */
 "use strict";
@@ -74,7 +74,7 @@ describe('test AdvertiserReportActuals', function () {
   it('count', function (done) {
 
     var
-      mapQueryString = {
+      mapParams = {
         'start_date': startDate,
         'end_date': endDate,
         'group': 'site_id,publisher_id',
@@ -83,7 +83,7 @@ describe('test AdvertiserReportActuals', function () {
       };
 
     advertiserReport.count(
-      mapQueryString,
+      mapParams,
       function (error, response) {
         expect(error).to.be.null;
         expect(response).to.be.not.null;
@@ -95,7 +95,7 @@ describe('test AdvertiserReportActuals', function () {
   it('find', function (done) {
 
     var
-      mapQueryString = {
+      mapParams = {
         'start_date': startDate,
         'end_date': endDate,
         'fields': arrayFieldsRecommended,
@@ -109,7 +109,7 @@ describe('test AdvertiserReportActuals', function () {
       };
 
     advertiserReport.find(
-      mapQueryString,
+      mapParams,
       function (error, response) {
         expect(error).to.be.null;
         expect(response).to.be.not.null;
@@ -121,7 +121,7 @@ describe('test AdvertiserReportActuals', function () {
   it('find2', function (done) {
 
     var
-      mapQueryString = {
+      mapParams = {
         'start_date': startDate,
         'end_date': endDate,
         'fields': arrayFieldsRecommended,
@@ -135,7 +135,7 @@ describe('test AdvertiserReportActuals', function () {
       };
 
      advertiserReport.find(
-      mapQueryString,
+      mapParams,
       function (error, response) {
         expect(error).to.be.null;
         expect(response).to.be.not.null;
@@ -144,10 +144,10 @@ describe('test AdvertiserReportActuals', function () {
     );
   });
 
-  it('exportReport CSV', function (done) {
+  it('export CSV', function (done) {
 
     var
-      mapQueryString = {
+      mapParams = {
         'start_date': startDate,
         'end_date': endDate,
         'fields': arrayFieldsRecommended,
@@ -158,8 +158,8 @@ describe('test AdvertiserReportActuals', function () {
         'response_timezone': strResponseTimezone
       };
 
-    advertiserReport.exportReport(
-      mapQueryString,
+    advertiserReport.export(
+      mapParams,
       function (error, response) {
         expect(error).to.be.null;
         expect(response).to.be.not.null;
@@ -175,7 +175,7 @@ describe('test AdvertiserReportActuals', function () {
   });
 
   it('statusCsvReport', function (done) {
-    advertiserReport.statusReport(
+    advertiserReport.status(
       csvJobId,
       function (error, response) {
         expect(error).to.be.null;
