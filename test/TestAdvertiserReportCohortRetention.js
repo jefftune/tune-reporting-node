@@ -11,7 +11,7 @@
  * @author    Jeff Tanner <jefft@tune.com>
  * @copyright 2015 TUNE, Inc. (http://www.tune.com)
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
- * @version   $Date: 2015-04-05 13:42:19 $
+ * @version   $Date: 2015-04-07 15:04:18 $
  * @link      http://developers.mobileapptracking.com @endlink
  */
 "use strict";
@@ -63,18 +63,18 @@ describe('test AdvertiserReportCohortRetention', function () {
   it('count', function (done) {
 
     var
-      mapQueryString = {
+      mapParams = {
         'start_date': startDate,
         'end_date': endDate,
         'cohort_type': 'click',
-        'interval': 'year_day',
+        'cohort_interval': 'year_day',
         'filter': '(install_publisher_id > 0)',
         'group': 'site_id,install_publisher_id',
         'response_timezone': strResponseTimezone
       };
 
     advertiserReport.count(
-      mapQueryString,
+      mapParams,
       function (error, response) {
         expect(error).to.be.null;
         expect(response).to.be.not.null;
@@ -89,7 +89,7 @@ describe('test AdvertiserReportCohortRetention', function () {
     expect(arrayFieldsRecommended).to.be.not.empty;
 
     var
-      mapQueryString = {
+      mapParams = {
         'start_date': startDate,
         'end_date': endDate,
         'fields': arrayFieldsRecommended,
@@ -99,12 +99,12 @@ describe('test AdvertiserReportCohortRetention', function () {
         'page': null,
         'sort': null,
         'cohort_type': 'click',
-        'interval': 'year_day',
+        'cohort_interval': 'year_day',
         'response_timezone': strResponseTimezone
       };
 
     advertiserReport.find(
-      mapQueryString,
+      mapParams,
       function (error, response) {
         expect(error).to.be.null;
         expect(response).to.be.not.null;
@@ -114,22 +114,22 @@ describe('test AdvertiserReportCohortRetention', function () {
     );
   });
 
-  it('exportReport CSV', function (done) {
+  it('export CSV', function (done) {
 
     var
-      mapQueryString = {
+      mapParams = {
         'start_date': startDate,
         'end_date': endDate,
         'fields': arrayFieldsRecommended,
         'group': 'site_id,install_publisher_id',
         'filter': '(install_publisher_id > 0)',
         'cohort_type': 'click',
-        'interval': 'year_day',
+        'cohort_interval': 'year_day',
         'response_timezone': strResponseTimezone
       };
 
-    advertiserReport.exportReport(
-      mapQueryString,
+    advertiserReport.export(
+      mapParams,
       function (error, response) {
         expect(error).to.be.null;
         expect(response).to.be.not.null;
@@ -145,7 +145,7 @@ describe('test AdvertiserReportCohortRetention', function () {
   });
 
   it('statusCsvReport', function (done) {
-    advertiserReport.statusReport(
+    advertiserReport.status(
       csvJobId,
       function (error, response) {
         expect(error).to.be.null;

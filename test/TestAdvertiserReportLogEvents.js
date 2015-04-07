@@ -11,7 +11,7 @@
  * @author    Jeff Tanner <jefft@tune.com>
  * @copyright 2015 TUNE, Inc. (http://www.tune.com)
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
- * @version   $Date: 2015-04-05 13:42:19 $
+ * @version   $Date: 2015-04-07 15:04:18 $
  * @link      http://developers.mobileapptracking.com @endlink
  */
 "use strict";
@@ -60,7 +60,7 @@ describe('test AdvertiserReportLogEvents', function () {
   it('count', function (done) {
 
     var
-      mapQueryString = {
+      mapParams = {
         'start_date': startDate,
         'end_date': endDate,
         'filter': null,
@@ -68,7 +68,7 @@ describe('test AdvertiserReportLogEvents', function () {
       };
 
     advertiserReport.count(
-      mapQueryString,
+      mapParams,
       function (error, response) {
         expect(error).to.be.null;
         expect(response).to.be.not.null;
@@ -81,7 +81,7 @@ describe('test AdvertiserReportLogEvents', function () {
   it('find', function (done) {
 
     var
-      mapQueryString = {
+      mapParams = {
         'start_date': startDate,
         'end_date': endDate,
         'fields': arrayFieldsRecommended,
@@ -93,7 +93,7 @@ describe('test AdvertiserReportLogEvents', function () {
       };
 
     advertiserReport.find(
-      mapQueryString,
+      mapParams,
       function (error, response) {
         expect(error).to.be.null;
         expect(response).to.be.not.null;
@@ -104,10 +104,10 @@ describe('test AdvertiserReportLogEvents', function () {
     );
   });
 
-  it('exportReport CSV', function (done) {
+  it('export CSV', function (done) {
 
     var
-      mapQueryString = {
+      mapParams = {
         'start_date': startDate,
         'end_date': endDate,
         'fields': arrayFieldsRecommended,
@@ -116,8 +116,8 @@ describe('test AdvertiserReportLogEvents', function () {
         'response_timezone': strResponseTimezone
       };
 
-    advertiserReport.exportReport(
-      mapQueryString,
+    advertiserReport.export(
+      mapParams,
       function (error, response) {
         expect(error).to.be.null;
         expect(response).to.be.not.null;
@@ -137,7 +137,7 @@ describe('test AdvertiserReportLogEvents', function () {
     expect(csvJobId).to.be.not.null;
     expect(csvJobId).to.be.a('string');
     expect(csvJobId).to.be.not.empty;
-    advertiserReport.statusReport(
+    advertiserReport.status(
       csvJobId,
       function (error, response) {
         expect(error).to.be.null;

@@ -10,7 +10,7 @@
  * @author    Jeff Tanner <jefft@tune.com>
  * @copyright 2015 TUNE, Inc. (http://www.tune.com)
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
- * @version   $Date: 2015-04-05 13:42:19 $
+ * @version   $Date: 2015-04-07 15:04:18 $
  * @link      http://developers.mobileapptracking.com @endlink
  */
 "use strict";
@@ -122,18 +122,18 @@ try {
       console.log('\n');
 
       var
-        mapQueryString = {
+        mapParams = {
           'start_date': startDate,
           'end_date': endDate,
           'cohort_type': 'click',
-          'interval': 'year_day',
+          'cohort_interval': 'year_day',
           'group': 'site_id,install_publisher_id',
           'filter': '(install_publisher_id > 0)',
           'response_timezone': strResponseTimezone
         };
 
       advertiserReport.count(
-        mapQueryString,
+        mapParams,
         function (error, response) {
           if (error) {
             return next(error);
@@ -165,11 +165,11 @@ try {
       console.log('\n');
 
       var
-        mapQueryString = {
+        mapParams = {
           'start_date': startDate,
           'end_date': endDate,
           'cohort_type': 'click',
-          'interval': 'year_day',
+          'cohort_interval': 'year_day',
           'aggregation_type': 'cumulative',
           'group': 'site_id,install_publisher_id',
           'fields': arrayFieldsRecommended,
@@ -181,7 +181,7 @@ try {
         };
 
       advertiserReport.find(
-        mapQueryString,
+        mapParams,
         function (error, response) {
           if (error) {
             return next(error);
@@ -209,11 +209,11 @@ try {
       console.log('\n');
 
       var
-        mapQueryString = {
+        mapParams = {
           'start_date': startDate,
           'end_date': endDate,
           'cohort_type': 'click',
-          'interval': 'year_day',
+          'cohort_interval': 'year_day',
           'aggregation_type': 'cumulative',
           'group': 'site_id,install_publisher_id',
           'fields': arrayFieldsRecommended,
@@ -221,8 +221,8 @@ try {
           'response_timezone': strResponseTimezone
         };
 
-      advertiserReport.exportReport(
-        mapQueryString,
+      advertiserReport.export(
+        mapParams,
         function (error, response) {
           if (error) {
             return next(error);
@@ -253,7 +253,7 @@ try {
       console.log('==========================================================');
       console.log('\n');
 
-      advertiserReport.statusReport(
+      advertiserReport.status(
         csvJobId,
         function (error, response) {
           if (error) {
@@ -286,7 +286,7 @@ try {
 
       csvReportUrl = undefined;
 
-      advertiserReport.fetchReport(
+      advertiserReport.fetch(
         csvJobId,
         function (error, response) {
           if (error) {
@@ -352,18 +352,18 @@ try {
       config.set('tune.reporting.auth_type', 'session_token');
 
       var
-        mapQueryString = {
+        mapParams = {
           'start_date': startDate,
           'end_date': endDate,
           'cohort_type': 'click',
-          'interval': 'year_day',
+          'cohort_interval': 'year_day',
           'group': 'site_id,install_publisher_id',
           'filter': '(install_publisher_id > 0)',
           'response_timezone': strResponseTimezone
         };
 
       advertiserReport.count(
-        mapQueryString,
+        mapParams,
         function (error, response) {
           if (error) {
             return next(error);

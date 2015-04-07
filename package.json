@@ -1,7 +1,7 @@
 {
   "name": "tune-reporting",
   "description": "TUNE Reporting SDK for Node.js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": {
     "name": "Jeff Tanner",
     "email": "jefft@tune.com"

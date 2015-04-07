@@ -10,7 +10,7 @@
  * @author    Jeff Tanner <jefft@tune.com>
  * @copyright 2015 TUNE, Inc. (http://www.tune.com)
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
- * @version   $Date: 2015-04-05 13:42:19 $
+ * @version   $Date: 2015-04-07 15:04:18 $
  * @link      http://developers.mobileapptracking.com @endlink
  */
 "use strict";
@@ -123,7 +123,7 @@ try {
       console.log('\n');
 
       var
-        mapQueryString = {
+        mapParams = {
           'start_date': startDate,
           'end_date': endDate,
           'group': 'site_id,publisher_id',
@@ -132,7 +132,7 @@ try {
         };
 
       advertiserReport.count(
-        mapQueryString,
+        mapParams,
         function (error, response) {
           if (error) {
             return next(error);
@@ -164,7 +164,7 @@ try {
       console.log('\n');
 
       var
-        mapQueryString = {
+        mapParams = {
           'start_date': startDate,
           'end_date': endDate,
           'fields': arrayFieldsRecommended,
@@ -178,7 +178,7 @@ try {
         };
 
       advertiserReport.find(
-        mapQueryString,
+        mapParams,
         function (error, response) {
           if (error) {
             return next(error);
@@ -207,7 +207,7 @@ try {
       console.log('\n');
 
       var
-        mapQueryString = {
+        mapParams = {
           'start_date': startDate,
           'end_date': endDate,
           'fields': arrayFieldsRecommended,
@@ -221,7 +221,7 @@ try {
         };
 
       advertiserReport.find(
-        mapQueryString,
+        mapParams,
         function (error, response) {
           if (error) {
             return next(error);
@@ -261,7 +261,7 @@ try {
           'revenues_usd',
           'publisher_sub_campaign.ref'
         ],
-        mapQueryString = {
+        mapParams = {
           'start_date': startDate,
           'end_date': endDate,
           'fields': fields,
@@ -275,7 +275,7 @@ try {
         };
 
       advertiserReport.find(
-        mapQueryString,
+        mapParams,
         function (error, response) {
           if (error) {
             return next(error);
@@ -315,7 +315,7 @@ try {
           'opens',
           'revenues_usd'
         ],
-        mapQueryString = {
+        mapParams = {
           'start_date': startDate,
           'end_date': endDate,
           'fields': fields,
@@ -329,7 +329,7 @@ try {
         };
 
       advertiserReport.find(
-        mapQueryString,
+        mapParams,
         function (error, response) {
           if (error) {
             return next(error);
@@ -357,7 +357,7 @@ try {
       console.log('\n');
 
       var
-        mapQueryString = {
+        mapParams = {
           'start_date': startDate,
           'end_date': endDate,
           'fields': arrayFieldsRecommended,
@@ -368,8 +368,8 @@ try {
           'response_timezone': strResponseTimezone
         };
 
-      advertiserReport.exportReport(
-        mapQueryString,
+      advertiserReport.export(
+        mapParams,
         function (error, response) {
           if (error) {
             return next(error);
@@ -401,7 +401,7 @@ try {
       console.log('==========================================================');
       console.log('\n');
 
-      advertiserReport.statusReport(
+      advertiserReport.status(
         csvJobId,
         function (error, response) {
           if (error) {
@@ -429,7 +429,7 @@ try {
 
       csvReportUrl = undefined;
 
-      advertiserReport.fetchReport(
+      advertiserReport.fetch(
         csvJobId,
         function (error, response) {
           if (error) {
@@ -493,7 +493,7 @@ try {
       jsonJobId = undefined;
 
       var
-        mapQueryString = {
+        mapParams = {
           'start_date': startDate,
           'end_date': endDate,
           'fields': arrayFieldsRecommended,
@@ -504,8 +504,8 @@ try {
           'response_timezone': strResponseTimezone
         };
 
-      advertiserReport.exportReport(
-        mapQueryString,
+      advertiserReport.export(
+        mapParams,
         function (error, response) {
           if (error) {
             return next(error);
@@ -534,7 +534,7 @@ try {
       console.log('==========================================================');
       console.log('\n');
 
-      advertiserReport.statusReport(
+      advertiserReport.status(
         jsonJobId,
         function (error, response) {
           if (error) {
@@ -561,7 +561,7 @@ try {
 
       jsonReportUrl = undefined;
 
-      advertiserReport.fetchReport(
+      advertiserReport.fetch(
         jsonJobId,
         function (error, response) {
           if (error) {
@@ -626,7 +626,7 @@ try {
       config.set('tune.reporting.auth_type', 'session_token');
 
       var
-        mapQueryString = {
+        mapParams = {
           'start_date': startDate,
           'end_date': endDate,
           'group': 'site_id,publisher_id',
@@ -635,7 +635,7 @@ try {
         };
 
       advertiserReport.count(
-        mapQueryString,
+        mapParams,
         function (error, response) {
           if (error) {
             return next(error);
