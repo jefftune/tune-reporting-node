@@ -1,8 +1,8 @@
 <h2>tune-reporting</h2>
 <h2>TUNE Reporting SDK for Node</h2>
 <h3>Incorporate TUNE Reporting services.</h3>
-<h4>Update:  $Date: 2015-04-07 15:04:18 $</h4>
-<h4>Version: 1.0.1</h4>
+<h4>Update:  $Date: 2015-04-10 11:10:41 $</h4>
+<h4>Version: 1.0.3</h4>
 ===
 
 <a id="TOP"></a>
@@ -59,7 +59,7 @@
 
     <li><a href="#sdk_classes">SDK Classes</a>
         <ul>
-            <li><a href="#sdk_classes_service">TUNE Management Service Classes</a></li>
+            <li><a href="#sdk_classes_service">TUNE Service Classes</a></li>
             <li><a href="#sdk_report_readers">Helper Classes</a></li>
             <li><a href="#sdk_classes_exceptions">Exception Classes</a></li>
         </ul>
@@ -110,7 +110,7 @@
 
 The **TUNE Reporting SDKs** addressed in this posting are for creating hosted applications which require handling requests to **TUNE Advertiser Report services** with utility focus is upon Advertiser Reporting endpoints.
 
-Even though the the breadth of the Management API goes beyond just reports, it is these reporting endpoints that our customers primarily access.
+Even though the the breadth of the Service goes beyond just reports, it is these reporting endpoints that our customers primarily access.
 
 The second goal of the SDKs is to assure that our customers’ developers are using best practices in gathering reports in the most optimal way.
 
@@ -138,13 +138,11 @@ All information pertaining to **TUNE SDKs for Mobile Apps** are found [here](htt
 <a id="sdk_overview_dev_community" name="sdk_overview_dev_community"></a>
 #### Developers Community
 
-Developer Community portal for MobileAppTracking™ (MAT), the industry leader in mobile advertising attribution and analytics. From API documentation to best practices, get everything you need to be successful with MAT.
+<p><a href="https://developers.mobileapptracking.com" target="_blank"><strong>Developers Community Site</strong></a> for MobileAppTracking™ (MAT), the industry leader in mobile advertising attribution and analytics, provides TUNE Reporting API documentation to best practices and everything you need to be successful with MAT.
+</p>
 
-[https://developers.mobileapptracking.com](https://developers.mobileapptracking.com)
-
-Additional positions on TUNE Reporting SDKs can be found here:
-
-[https://developers.mobileapptracking.com/tune-reporting-sdks/](https://developers.mobileapptracking.com/tune-reporting-sdks/)
+<p>This site contains complete information about <a href="https://developers.mobileapptracking.com/reporting-api/" target="_blank">TUNE Reporting API</a>, and references to all available <a href="https://developers.mobileapptracking.com/reporting-api/" target="_blank">TUNE Reporting SDKs</a> with sample code.
+</p>
 
 <p>
 <a href="#TOP">
@@ -226,7 +224,7 @@ With generated API_KEY from TUNE MobileAppTracking Platform account, replace `UN
 tune.reporting.auth_key=UNDEFINED
 ; TUNE Reporting Authentication Type: api_key OR session_token.
 tune.reporting.auth_type=api_key
-; Validate use TUNE Management API fields used within action parameters.
+; Validate use TUNE Service fields used within action parameters.
 tune.reporting.verify_fields_boolean=false
 ; TUNE reporting export status sleep (seconds).
 tune.reporting.status.sleep=10
@@ -314,16 +312,14 @@ This code documentation generation may require npm installation of [YUIdoc](http
 </a>
 
 <p>
-<a href="#TOP">
-<img alt="Return to Top" src="https://raw.githubusercontent.com/MobileAppTracking/tune-reporting-node/master/docs/images/b_top.gif" border="0">
-</a>
+<figure id="attachment_17743" class="thumbnail wp-caption aligncenter" style="width: 600px"><a href="https://mat-websites.s3.amazonaws.com/wp-content/uploads/reporting_sdk_node_yuidoc.png"><img src="https://mat-websites.s3.amazonaws.com/wp-content/uploads/reporting_sdk_node_yuidoc-600x359.png" alt="TUNE Reporting SDK YuiDoc Generated" width="600" height="359" class="size-docs_600 wp-image-17743"></a><figcaption class="caption wp-caption-text">TUNE Reporting SDK YuiDoc Generated</figcaption></figure>
 </p>
 
 <p>&nbsp;</p>
 <a id="sdk_advertiser_reporting_overview" name="sdk_advertiser_reporting_overview"></a>
 ### Advertiser Reporting Overview
 
-The utility focus of the SDKs is upon the <a href="/advertiser-reporting-endpoints/">Advertiser Reporting endpoints</a>. Even though the the breadth of the Management API goes beyond just reports, it is these endpoints that our customers primarily access. The second goal of the SDKs is to assure that our customers' developers are using best practices in gathering reports in the most optimal way.
+The utility focus of the SDKs is upon the <a href="https://developers.mobileapptracking.com/reporting-api/" target="_blank">Advertiser Reporting API endpoints</a>. Even though the the breadth of the Management API goes beyond just reports, it is these endpoints that our customers primarily access. The second goal of the SDKs is to assure that our customers' developers are using best practices in gathering reports in the most optimal way.
 
 <a href="https://raw.githubusercontent.com/MobileAppTracking/tune-reporting-node/master/docs/images/tune_advertiser_reporting_classes.png">
 <img src="https://raw.githubusercontent.com/MobileAppTracking/tune-reporting-node/master/docs/images/tune_advertiser_reporting_classes.png" alt="Tune Advertiser Reporting Classes" width="500" height="350" /></a>
@@ -377,7 +373,7 @@ Advertiser Reporting class that perform Retention Reports are:
 </dl>
 
 <a href="https://raw.githubusercontent.com/MobileAppTracking/tune-reporting-node/master/docs/images/tune_management_service_reporting_endpoints.png">
-<img src="https://raw.githubusercontent.com/MobileAppTracking/tune-reporting-node/master/docs/images/tune_management_service_reporting_endpoints.png" alt="Management API Advertiser Reports covered by TUNE Reporting SDKs." width="592" height="292" /></a>
+<img src="https://raw.githubusercontent.com/MobileAppTracking/tune-reporting-node/master/docs/images/tune_management_service_reporting_endpoints.png" alt="Service Advertiser Reports covered by TUNE Reporting SDKs." width="592" height="292" /></a>
 
 <p>
 <a href="#TOP">
@@ -511,7 +507,7 @@ examples/
 ├── ExampleAdvertiserReportLogEvents.js
 ├── ExampleAdvertiserReportLogInstalls.js
 ├── ExampleAdvertiserReportLogPostbacks.js
-└── ExampleTuneManagementClient.js
+└── ExampleTuneServiceClient.js
 ```
 
 <a id="sdk_sources_tests" name="sdk_sources_tests"></a>
@@ -535,7 +531,7 @@ test/
 ├── TestAdvertiserReportLogEvents.js
 ├── TestAdvertiserReportLogInstalls.js
 ├── TestAdvertiserReportLogPostbacks.js
-└── TestTuneManagementClient.js
+└── TestTuneServiceClient.js
 ```
 
 <p>
@@ -595,7 +591,7 @@ test/
 
 <ul>
     <li><code>TuneSdkException</code> - Exception thrown if error occurs within TUNE Reporting SDK.</li>
-    <li><code>TuneServiceException</code> - Exception thrown if error condition is returned from TUNE Management Service.</li>
+    <li><code>TuneServiceException</code> - Exception thrown if error condition is returned from TUNE Service.</li>
 </ul>
 
 <a href="https://raw.githubusercontent.com/MobileAppTracking/tune-reporting-node/master/docs/images/tune_reporting_exceptions.png">
@@ -837,7 +833,7 @@ Function <code>define()</code> returns a complete metadata mapping of the endpoi
 
 In addition, the constructor for every advertiser records' class has a bool parameter <code>validate</code> which checks that the field names used within parameter values are valid.
 
-Another tool is to pre-build your request using <a href="/management-api/explorer/root/">Management API Root Endpoints Explorer</a>.
+Another tool is to pre-build your request using <a href="/management-api/explorer/root/">Service Root Endpoints Explorer</a>.
 
 <a href="https://raw.githubusercontent.com/MobileAppTracking/tune-reporting-node/master/docs/images/api_explorer_record_fields.png">
 <img src="https://raw.githubusercontent.com/MobileAppTracking/tune-reporting-node/master/docs/images/api_explorer_record_fields-600x436.png" alt="API Explorer -- Record and Related Record&#039;s Fields for a specific endpoint." width="600" height="436" title="Click to Expand" /></a>

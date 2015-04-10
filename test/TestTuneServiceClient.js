@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * TestTuneManagementClient.js, Tests of TUNE Management API Client.
+ * TestTuneServiceClient.js, Tests of TUNE Service Client.
  *
  * @module tune-reporting
  * @submodule test
@@ -11,7 +11,7 @@
  * @author    Jeff Tanner <jefft@tune.com>
  * @copyright 2015 TUNE, Inc. (http://www.tune.com)
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
- * @version   $Date: 2015-01-08 13:24:24 $
+ * @version   $Date: 2015-04-10 11:10:41 $
  * @link      http://developers.mobileapptracking.com @endlink
  */
 "use strict";

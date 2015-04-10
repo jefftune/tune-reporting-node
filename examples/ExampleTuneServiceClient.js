@@ -10,7 +10,7 @@
  * @author    Jeff Tanner <jefft@tune.com>
  * @copyright 2015 TUNE, Inc. (http://www.tune.com)
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
- * @version   $Date: 2015-01-07 18:08:35 $
+ * @version   $Date: 2015-04-10 11:10:41 $
  * @link      http://developers.mobileapptracking.com @endlink
  */
 "use strict";
@@ -68,7 +68,7 @@ try {
     taskStartExample: function (next) {
       console.log('\n');
       console.log('======================================================'.blue.bold);
-      console.log(' Begin: TUNE Management API Client                    '.blue.bold);
+      console.log(' Begin: TUNE Service Client                    '.blue.bold);
       console.log('======================================================'.blue.bold);
       console.log('\n');
       next();
@@ -120,7 +120,7 @@ try {
     taskRequest: function (next) {
       console.log('\n');
       console.log('==========================================================');
-      console.log(' TUNE Management API Client Request.                      ');
+      console.log(' TUNE Service Client Request.                      ');
       console.log('==========================================================');
       console.log('\n');
 
@@ -144,7 +144,7 @@ try {
     },
     taskRequestSessionToken: function (next) {
       console.log('==========================================================');
-      console.log(' TUNE Management API Client Request session_token.        ');
+      console.log(' TUNE Service Client Request session_token.        ');
       console.log('==========================================================');
       console.log('\n');
 
