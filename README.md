@@ -1,8 +1,8 @@
 <h2>tune-reporting</h2>
 <h2>TUNE Reporting SDK for Node</h2>
 <h3>Incorporate TUNE Reporting services.</h3>
-<h4>Update:  $Date: 2015-04-07 15:04:18 $</h4>
-<h4>Version: 1.0.1</h4>
+<h4>Update:  $Date: 2015-04-10 11:10:41 $</h4>
+<h4>Version: 1.0.7</h4>
 ===
 
 <a id="TOP"></a>
@@ -36,19 +36,15 @@
             <li><a href="#sdk_install_config">Configuration</a></li>
         </ul>
     </li>
-
     <li><a href="#sdk_gendoc">SDK Generated Documentation</a>
         <ul>
             <li><a href="#sdk_gendoc_yuidoc">YUIdoc</a></li>
         </ul>
     </li>
-
     <li><a href="#sdk_advertiser_reporting_overview">Advertiser Reporting Overview</a>
     </li>
-
     <li><a href="#sdk_exporting_reports">Exporting Advertiser Reports</a>
     </li>
-
     <li><a href="#sdk_sources">SDK Sources</a>
         <ul>
             <li><a href="#sdk_sources_lib">Library</a></li>
@@ -56,17 +52,14 @@
             <li><a href="#sdk_sources_tests">Tests</a></li>
         </ul>
     </li>
-
     <li><a href="#sdk_classes">SDK Classes</a>
         <ul>
-            <li><a href="#sdk_classes_service">TUNE Management Service Classes</a></li>
+            <li><a href="#sdk_classes_service">TUNE Service Classes</a></li>
             <li><a href="#sdk_report_readers">Helper Classes</a></li>
             <li><a href="#sdk_classes_exceptions">Exception Classes</a></li>
         </ul>
     </li>
-
-    <li>
-        <a href="#sdk_methods">Advertiser Reporting Methods</a>
+    <li><a href="#sdk_methods">Advertiser Reporting Methods</a>
         <ul>
             <li><a href="#sdk_method_count"><code>count()</code></a></li>
             <li><a href="#sdk_method_find"><code>find()</code></a></li>
@@ -76,10 +69,8 @@
             <li><a href="#sdk_method_fields"><code>fields()</code></a></li>
         </ul>
     </li>
-
     <li><a href="#sdk_reporting_fields">Advertiser Reporting Fields</a>
     </li>
-
     <li>
         <a href="#sdk_parameters">Advertiser Reporting Parameters</a>
         <ul>
@@ -89,10 +80,8 @@
             <li><a href="#sdk_parameter_filter"><code>filter</code></a></li>
         </ul>
     </li>
-
     <li><a href="#sdk_license">MIT License</a>
     </li>
-
     <li><a href="#sdk_issues">SDK Issues</a>
     </li>
 </ul>
@@ -110,7 +99,7 @@
 
 The **TUNE Reporting SDKs** addressed in this posting are for creating hosted applications which require handling requests to **TUNE Advertiser Report services** with utility focus is upon Advertiser Reporting endpoints.
 
-Even though the the breadth of the Management API goes beyond just reports, it is these reporting endpoints that our customers primarily access.
+Even though the the breadth of the Service goes beyond just reports, it is these reporting endpoints that our customers primarily access.
 
 The second goal of the SDKs is to assure that our customers’ developers are using best practices in gathering reports in the most optimal way.
 
@@ -226,7 +215,7 @@ With generated API_KEY from TUNE MobileAppTracking Platform account, replace `UN
 tune.reporting.auth_key=UNDEFINED
 ; TUNE Reporting Authentication Type: api_key OR session_token.
 tune.reporting.auth_type=api_key
-; Validate use TUNE Management API fields used within action parameters.
+; Validate use TUNE Service fields used within action parameters.
 tune.reporting.verify_fields_boolean=false
 ; TUNE reporting export status sleep (seconds).
 tune.reporting.status.sleep=10
@@ -323,7 +312,7 @@ This code documentation generation may require npm installation of [YUIdoc](http
 <a id="sdk_advertiser_reporting_overview" name="sdk_advertiser_reporting_overview"></a>
 ### Advertiser Reporting Overview
 
-The utility focus of the SDKs is upon the <a href="/advertiser-reporting-endpoints/">Advertiser Reporting endpoints</a>. Even though the the breadth of the Management API goes beyond just reports, it is these endpoints that our customers primarily access. The second goal of the SDKs is to assure that our customers' developers are using best practices in gathering reports in the most optimal way.
+The utility focus of the SDKs is upon the <a href="/advertiser-reporting-endpoints/">Advertiser Reporting endpoints</a>. Even though the the breadth of the Service goes beyond just reports, it is these endpoints that our customers primarily access. The second goal of the SDKs is to assure that our customers' developers are using best practices in gathering reports in the most optimal way.
 
 <a href="https://raw.githubusercontent.com/MobileAppTracking/tune-reporting-node/master/docs/images/tune_advertiser_reporting_classes.png">
 <img src="https://raw.githubusercontent.com/MobileAppTracking/tune-reporting-node/master/docs/images/tune_advertiser_reporting_classes.png" alt="Tune Advertiser Reporting Classes" width="500" height="350" /></a>
@@ -377,7 +366,7 @@ Advertiser Reporting class that perform Retention Reports are:
 </dl>
 
 <a href="https://raw.githubusercontent.com/MobileAppTracking/tune-reporting-node/master/docs/images/tune_management_service_reporting_endpoints.png">
-<img src="https://raw.githubusercontent.com/MobileAppTracking/tune-reporting-node/master/docs/images/tune_management_service_reporting_endpoints.png" alt="Management API Advertiser Reports covered by TUNE Reporting SDKs." width="592" height="292" /></a>
+<img src="https://raw.githubusercontent.com/MobileAppTracking/tune-reporting-node/master/docs/images/tune_management_service_reporting_endpoints.png" alt="Service Advertiser Reports covered by TUNE Reporting SDKs." width="592" height="292" /></a>
 
 <p>
 <a href="#TOP">
@@ -511,7 +500,7 @@ examples/
 ├── ExampleAdvertiserReportLogEvents.js
 ├── ExampleAdvertiserReportLogInstalls.js
 ├── ExampleAdvertiserReportLogPostbacks.js
-└── ExampleTuneManagementClient.js
+└── ExampleTuneServiceClient.js
 ```
 
 <a id="sdk_sources_tests" name="sdk_sources_tests"></a>
@@ -535,7 +524,7 @@ test/
 ├── TestAdvertiserReportLogEvents.js
 ├── TestAdvertiserReportLogInstalls.js
 ├── TestAdvertiserReportLogPostbacks.js
-└── TestTuneManagementClient.js
+└── TestTuneServiceClient.js
 ```
 
 <p>
@@ -595,7 +584,7 @@ test/
 
 <ul>
     <li><code>TuneSdkException</code> - Exception thrown if error occurs within TUNE Reporting SDK.</li>
-    <li><code>TuneServiceException</code> - Exception thrown if error condition is returned from TUNE Management Service.</li>
+    <li><code>TuneServiceException</code> - Exception thrown if error condition is returned from TUNE Service.</li>
 </ul>
 
 <a href="https://raw.githubusercontent.com/MobileAppTracking/tune-reporting-node/master/docs/images/tune_reporting_exceptions.png">
@@ -620,7 +609,6 @@ Finds all existing records matching provided filter criteria and returns total c
 <a href="https://raw.githubusercontent.com/MobileAppTracking/tune-reporting-node/master/docs/images/management-api-action-count.png">
 <img src="https://raw.githubusercontent.com/MobileAppTracking/tune-reporting-node/master/docs/images/management-api-action-count-700x247.png" alt="Function count()" width="700" height="247" title="Click to Expand" /></a>
 
-<!-- Node.js -->
 ```javascript
     var
       advertiserReport = new AdvertiserReportLogClicks(),
@@ -663,7 +651,6 @@ Gathers all existing records that match filter criteria and returns an array of 
 <a href="https://raw.githubusercontent.com/MobileAppTracking/tune-reporting-node/master/docs/images/management-api-action-find.png">
 <img src="https://raw.githubusercontent.com/MobileAppTracking/tune-reporting-node/master/docs/images/management-api-action-find-700x511.png" alt="Function find()" width="700" height="511" title="Click to Expand" /></a>
 
-<!-- Node.js -->
 ```javascript
     var
       advertiserReport = new AdvertiserReportLogClicks(),
@@ -698,15 +685,15 @@ Gathers all existing records that match filter criteria and returns an array of 
 ```
 
 <a id="sdk_method_export" name="sdk_method_export"></a>
-##### Method <code>export()</code>fieldsRecommended
+##### Method <code>export()</code>
 
 Provides the same signature as function find(), accept parameters <code>limit</code> and <code>page</code>, because this function's intent is to request export of a full report. It returns a populated instance of <code>class Response</code> with <strong>job identifier</strong> of report in queue and ready to be processed. Format of content can be requested to be either CSV or JSON.
 
 <a href="https://raw.githubusercontent.com/MobileAppTracking/tune-reporting-node/master/docs/images/management-api-action-export.png">
 <img src="https://raw.githubusercontent.com/MobileAppTracking/tune-reporting-node/master/docs/images/management-api-action-export-700x338.png" alt="Function export()" width="700" height="338" title="Click to Expand" /></a>
 
-<!-- Node.js -->
 ```javascript
+
     var
       advertiserReport = new AdvertiserReportLogClicks(),
       mapParams = {
@@ -757,8 +744,7 @@ A helper function that creates a threaded worker that handles the status request
 <a href="https://raw.githubusercontent.com/MobileAppTracking/tune-reporting-node/master/docs/images/management-api-action-fetch.png">
 <img src="https://raw.githubusercontent.com/MobileAppTracking/tune-reporting-node/master/docs/images/management-api-action-fetch-700x337.png" alt="Function fetch()" width="700" height="337" title="Click to Expand" /></a>
 
-<!-- Node.js -->
-```javascript
+```
     var
       advertiserReport = new AdvertiserReportLogClicks(),
       requestFetch = advertiserReport.fetch(
@@ -794,8 +780,7 @@ A helper function that creates a threaded worker that handles the status request
 
 Method <strong>fields()</strong> returns a listing of all the fields that can be used that can be used by that report endpoint, which will include all the field of its immediate record and all its related records.
 
-<!-- Node.js -->
-```javascript
+```
     var advertiserReport = new AdvertiserReportLogClicks(
       apiKey,
       true
@@ -837,7 +822,7 @@ Function <code>define()</code> returns a complete metadata mapping of the endpoi
 
 In addition, the constructor for every advertiser records' class has a bool parameter <code>validate</code> which checks that the field names used within parameter values are valid.
 
-Another tool is to pre-build your request using <a href="/management-api/explorer/root/">Management API Root Endpoints Explorer</a>.
+Another tool is to pre-build your request using <a href="/management-api/explorer/root/">Service Root Endpoints Explorer</a>.
 
 <a href="https://raw.githubusercontent.com/MobileAppTracking/tune-reporting-node/master/docs/images/api_explorer_record_fields.png">
 <img src="https://raw.githubusercontent.com/MobileAppTracking/tune-reporting-node/master/docs/images/api_explorer_record_fields-600x436.png" alt="API Explorer -- Record and Related Record&#039;s Fields for a specific endpoint." width="600" height="436" title="Click to Expand" /></a>

@@ -1,7 +1,7 @@
 {
     "name": "TUNE Reporting SDK for Node.js",
-    "description": "Helper module for TUNE Reporting API services.<br>The utility focus of this SDK is upon the Advertiser Reporting endpoints.<br>Even though the the breadth of the Management API goes beyond just reports, it is these endpoints that our customers primarily access.<br>The second goal of the SDKs is to assure that our customers’ developers are using best practices in gathering reports in the most optimal way.",
-    "version": "0.9.3",
+    "description": "Helper module for TUNE Reporting API services.<br>The utility focus of this SDK is upon the Advertiser Reporting endpoints.<br>Even though the the breadth of the Service goes beyond just reports, it is these endpoints that our customers primarily access.<br>The second goal of the SDKs is to assure that our customers’ developers are using best practices in gathering reports in the most optimal way.",
+    "version": "1.0.1",
     "url": "http://developers.mobileapptracking.com/tune-reporting-sdks/",
     "logo": "https://developers.mobileapptracking.com/wp-content/uploads/mobileapptracking-logo.png",
     "options": {
