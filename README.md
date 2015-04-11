@@ -307,10 +307,6 @@ This code documentation generation may require npm installation of [YUIdoc](http
     $ make docs-yuidoc
 </pre>
 
-<a href="https://raw.githubusercontent.com/MobileAppTracking/tune-reporting-node/master/docs/images/TuneReporting_Node_YUIdoc.png">
-<img src="https://raw.githubusercontent.com/MobileAppTracking/tune-reporting-node/master/docs/images/TuneReporting_Node_YUIdoc-400x132.png" alt="Tune-Reporting Node.js Node.jsdoc Generated" width="400" height="222">
-</a>
-
 <p>
 <figure id="attachment_17743" class="thumbnail wp-caption aligncenter" style="width: 600px"><a href="https://mat-websites.s3.amazonaws.com/wp-content/uploads/reporting_sdk_node_yuidoc.png"><img src="https://mat-websites.s3.amazonaws.com/wp-content/uploads/reporting_sdk_node_yuidoc-600x359.png" alt="TUNE Reporting SDK YuiDoc Generated" width="600" height="359" class="size-docs_600 wp-image-17743"></a><figcaption class="caption wp-caption-text">TUNE Reporting SDK YuiDoc Generated</figcaption></figure>
 </p>
@@ -321,8 +317,7 @@ This code documentation generation may require npm installation of [YUIdoc](http
 
 The utility focus of the SDKs is upon the <a href="https://developers.mobileapptracking.com/reporting-api/" target="_blank">Advertiser Reporting API endpoints</a>. Even though the the breadth of the Management API goes beyond just reports, it is these endpoints that our customers primarily access. The second goal of the SDKs is to assure that our customers' developers are using best practices in gathering reports in the most optimal way.
 
-<a href="https://raw.githubusercontent.com/MobileAppTracking/tune-reporting-node/master/docs/images/tune_advertiser_reporting_classes.png">
-<img src="https://raw.githubusercontent.com/MobileAppTracking/tune-reporting-node/master/docs/images/tune_advertiser_reporting_classes.png" alt="Tune Advertiser Reporting Classes" width="500" height="350" /></a>
+<figure style="width: 600px"><a href="http://mat-websites.s3.amazonaws.com/wp-content/uploads/tune_reporting_sdk_classes.png"><img src="http://mat-websites.s3.amazonaws.com/wp-content/uploads/tune_reporting_sdk_classes-600x365.png" alt="TUNE Reporting SDK Classes" width="600" height="365" class="size-docs_600 wp-image-17763"></a><figcaption class="caption wp-caption-text">TUNE Reporting SDK Classes</figcaption></figure>
 
 The endpoints interfaced by TUNE API SDKs provide access in gathering four types of reports:
 
@@ -371,10 +366,7 @@ Advertiser Reporting class that perform Retention Reports are:
 </ul>
 </dd>
 </dl>
-
-<a href="https://raw.githubusercontent.com/MobileAppTracking/tune-reporting-node/master/docs/images/tune_management_service_reporting_endpoints.png">
-<img src="https://raw.githubusercontent.com/MobileAppTracking/tune-reporting-node/master/docs/images/tune_management_service_reporting_endpoints.png" alt="Service Advertiser Reports covered by TUNE Reporting SDKs." width="592" height="292" /></a>
-
+<figure id="attachment_17769" class="thumbnail wp-caption aligncenter" style="width: 600px"><a href="http://mat-websites.s3.amazonaws.com/wp-content/uploads/tune_reporting_api_endpoints1.png"><img src="http://mat-websites.s3.amazonaws.com/wp-content/uploads/tune_reporting_api_endpoints1-600x315.png" alt="TUNE Reporting API Endpoints" width="600" height="315" class="size-docs_600 wp-image-17769"></a><figcaption class="caption wp-caption-text">TUNE Reporting API Endpoints</figcaption></figure>
 <p>
 <a href="#TOP">
 <img alt="Return to Top" src="https://raw.githubusercontent.com/MobileAppTracking/tune-reporting-node/master/docs/images/b_top.gif" border="0">
