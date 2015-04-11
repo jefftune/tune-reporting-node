@@ -1,7 +1,7 @@
 <h2>tune-reporting Change Log</h2>
 <h2>TUNE Reporting SDK for Node.js</h2>
 <h3>Incorporate TUNE Reporting services.</h3>
-<h4>Update:  $Date: 2015-04-05 13:42:19 $</h4>
+<h4>Update:  $Date: 2015-04-09 17:36:25 $</h4>
 =======================
 
 Here you can see the full list of changes between each tune-api-php release.
@@ -117,7 +117,8 @@ Version 0.1.20
 
 Beta public release on January 08, 2015
 
-Version 1.0.0
+
+Version 1.0.2
 --------------
 
-First production release of tune-reporting-node.
+First production release on April 09, 2015

@@ -2,7 +2,7 @@
 *.komodoproject
 
 # Code build files
-node_modules
+node_modules/
 
 # Code documentation
 docs/jsdoc/
@@ -13,3 +13,6 @@ docs/yuidoc/
 *.log
 *.*~
 *~
+
+# Script files
+scripts/
