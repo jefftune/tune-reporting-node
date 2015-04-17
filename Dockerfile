@@ -13,17 +13,12 @@ RUN yum -y update && \
     yum -y install tar && \
     yum -y clean all
 
-# using nvm because Node 0.12 is not currently easily installable
-RUN git clone https://github.com/creationix/nvm.git ~/.nvm && cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`
-RUN source ~/.nvm/nvm.sh && nvm install 0.12 && nvm use 0.12 && ln -s ~/.nvm/versions/node/v0.12.0/bin/node /usr/bin/node
+# Enable EPEL for Node.js
+RUN     rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
+# Install Node.js and npm
+RUN     yum install -y npm
 
-# Install Node.js
-RUN yum install nodejs && \
-    node --version
-
-# Install Node package manager
-RUN yum install npm && \
-    npm --version
+RUN npm --version
 
 # Install node module dependencies
 RUN npm install
