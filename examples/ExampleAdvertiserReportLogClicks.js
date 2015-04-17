@@ -10,7 +10,7 @@
  * @author    Jeff Tanner <jefft@tune.com>
  * @copyright 2015 TUNE, Inc. (http://www.tune.com)
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
- * @version   $Date: 2015-04-05 13:42:19 $
+ * @version   $Date: 2015-04-16 15:41:32 $
  * @link      http://developers.mobileapptracking.com @endlink
  */
 "use strict";
@@ -89,6 +89,10 @@ try {
         sessionToken = response.getData();
         console.log(' session_token:');
         console.log(sessionToken);
+
+        config.set('tune.reporting.auth_key', sessionToken);
+        config.set('tune.reporting.auth_type', 'session_token');
+
         return next();
       });
     },
@@ -137,9 +141,6 @@ try {
       console.log('==========================================================');
       console.log('\n');
 
-      config.set('tune.reporting.auth_key', sessionToken);
-      config.set('tune.reporting.auth_type', 'session_token');
-
       var
         mapParams = {
           'start_date': startDate,
@@ -162,6 +163,9 @@ try {
           var count = response.getData();
 
           console.log(' Status: "success"');
+          console.log('\n');
+          console.log(response.toJson());
+          console.log('\n');
           console.log(' TuneServiceResponse:');
           console.log(response.toJson().responseJson.data);
 
@@ -189,6 +193,7 @@ try {
           }
 
           console.log(' Status: "success"');
+          console.log('\n');
           console.log(' Recommended Fields:');
           console.log(response);
           arrayFieldsRecommended = response;
@@ -202,6 +207,9 @@ try {
       console.log(' Find Advertiser Report Log Clicks.                       ');
       console.log('==========================================================');
       console.log('\n');
+
+      config.set('tune.reporting.auth_key', sessionToken);
+      config.set('tune.reporting.auth_type', 'session_token');
 
       var
         mapParams = {
@@ -227,6 +235,9 @@ try {
           }
 
           console.log(' Status: "success"');
+          console.log('\n');
+          console.log(response.toJson());
+          console.log('\n');
           console.log(' TuneServiceResponse:');
           console.log(response.toJson().responseJson.data);
           return next();
@@ -239,6 +250,9 @@ try {
       console.log(' Export Advertiser Report Log Clicks CSV report.          ');
       console.log('==========================================================');
       console.log('\n');
+
+      config.set('tune.reporting.auth_key', sessionToken);
+      config.set('tune.reporting.auth_type', 'session_token');
 
       var
         mapParams = {
@@ -262,6 +276,9 @@ try {
           }
 
           console.log(' Status: "success"');
+          console.log('\n');
+          console.log(response.toJson());
+          console.log('\n');
           console.log(' TuneServiceResponse:');
           console.log(response.toJson().responseJson.data);
 
@@ -292,6 +309,9 @@ try {
           }
 
           console.log(' Status: "success"');
+          console.log('\n');
+          console.log(response.toJson());
+          console.log('\n');
           var json = response.toJson();
           console.log(json.responseJson.data);
 
