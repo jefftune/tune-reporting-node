@@ -68,7 +68,7 @@ try {
     taskStartExample: function (next) {
       console.log('\n');
       console.log('======================================================'.blue.bold);
-      console.log(' Begin: TUNE Service Client                    '.blue.bold);
+      console.log(' Begin: TUNE Service Client                           '.blue.bold);
       console.log('======================================================'.blue.bold);
       console.log('\n');
       next();
