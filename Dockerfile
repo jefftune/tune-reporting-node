@@ -1,6 +1,6 @@
 # TUNE Reporting SDK for Node
 # Dockerfile for Jenkins CI
-# Update:  $Date: 2105-04-17 15:00:00 $
+# Update:  $Date: 2015-04-17 16:00:00 $
 
 FROM docker-dev.ops.tune.com/itops/base_centos6:latest
 
@@ -22,5 +22,3 @@ RUN npm --version
 
 RUN pwd
 RUN ls -al
-
-RUN echo $WORKSPACE
