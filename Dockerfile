@@ -1,6 +1,6 @@
 # TUNE Reporting SDK for Node
 # Dockerfile for Jenkins CI
-# Update:  $Date: 2014-12-23 20:14:14 $
+# Update:  $Date: 2105-04-17 15:00:00 $
 
 FROM docker-dev.ops.tune.com/itops/base_centos6:latest
 
@@ -23,7 +23,7 @@ RUN npm --version
 RUN pwd
 RUN ls -al
 
-RUN ls /data/
+RUN echo $WORKSPACE
 
 # Install node module dependencies
 RUN npm install
