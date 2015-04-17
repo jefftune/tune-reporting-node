@@ -23,6 +23,8 @@ RUN npm --version
 RUN pwd
 RUN ls -al
 
+RUN ls /data/
+
 # Install node module dependencies
 RUN npm install
 
