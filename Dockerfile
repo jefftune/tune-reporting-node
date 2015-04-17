@@ -18,11 +18,11 @@ RUN git clone https://github.com/creationix/nvm.git ~/.nvm && cd ~/.nvm && git c
 RUN source ~/.nvm/nvm.sh && nvm install 0.12 && nvm use 0.12 && ln -s ~/.nvm/versions/node/v0.12.0/bin/node /usr/bin/node
 
 # Install Node.js
-RUN yum install nodejs \
+RUN yum install nodejs && \
     node --version
 
 # Install Node package manager
-RUN yum install npm \
+RUN yum install npm && \
     npm --version
 
 # Install node module dependencies
