@@ -24,9 +24,3 @@ RUN pwd
 RUN ls -al
 
 RUN echo $WORKSPACE
-
-# Install node module dependencies
-RUN npm install
-
-# Perform mocha tests
-RUN make api_key=demoadv test
