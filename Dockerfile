@@ -34,6 +34,9 @@ ENV APPLICATION_MODE all
 ENV NODE_ENV test
 ENV TUNE_REPORTING_API_KEY demoadv
 
+RUN ls -al
+RUN ls -al /data/
+
 WORKDIR /data/tune-reporting-node
 
 CMD ["env", "./node_modules/.bin/mocha"]
