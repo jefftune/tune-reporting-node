@@ -14,6 +14,7 @@ RUN yum -y update && \
     yum -y clean all
 
 RUN npm --version
+RUN node --version
 
 RUN pwd
 
