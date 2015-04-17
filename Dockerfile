@@ -23,7 +23,7 @@ RUN npm --version
 RUN pwd
 RUN ls -al
 
-RUN ls /data/
+RUN echo $WORKSPACE
 
 # Install node module dependencies
 RUN npm install
