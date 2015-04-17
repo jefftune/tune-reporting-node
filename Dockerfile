@@ -4,7 +4,7 @@
 
 FROM docker-dev.ops.tune.com/itops/base_centos6:latest
 
-MAINTAINER Jeff Tanner jefft@tune.com
+MAINTAINER jefft@tune.com
 
 # EPEL (Extra Packages for Enterprise Linux) repository that
 # is available for CentOS and related distributions.
@@ -13,12 +13,27 @@ RUN yum -y update && \
     yum -y install tar && \
     yum -y clean all
 
-# Enable EPEL for Node.js
-RUN     rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
+## Dependency Installation
+RUN curl -sL https://rpm.nodesource.com/setup | bash - && \
+  yum install -y which redhat-lsb-core wget nodejs gcc-c++ make chai convict mocha should sinon kernel-devel
+  
 # Install Node.js and npm
 RUN     yum install -y npm
 
 RUN npm --version
 
-RUN pwd
-RUN ls -al
+RUN node --version
+
+## Make company standard paths
+RUN mkdir -p /data/tune-reporting-node && \
+  mkdir -p /var/has/data/tune-reporting-node
+  
+COPY . /data/tune-reporting-node
+
+ENV APPLICATION_MODE all
+ENV NODE_ENV test
+ENV TUNE_REPORTING_API_KEY demoadv
+
+WORKDIR /data/tune-reporting-node
+
+CMD ["env", "./node_modules/.bin/mocha"]
