@@ -37,25 +37,48 @@ var
 describe('test TuneServiceClient', function () {
   var
     apiKey,
-    client = undefined;
+    sessionAuthenticate = new SessionAuthenticate(),
+    sessionToken,
+    client;
 
-  before(function () {
+  before(function (done) {
     apiKey = process.env.TUNE_REPORTING_API_KEY;
+    assert(apiKey);
+
     config.set('tune.reporting.auth_key', apiKey);
     config.set('tune.reporting.auth_type', 'api_key');
-    client = new TuneServiceClient(
-      'account/users',
-      'find',
-      apiKey,
-      'api_key',
-      {
-        'limit' : 5,
-        'filter' : "(first_name LIKE '%a%')"
+
+    sessionAuthenticate.getSessionToken(apiKey, function (error, response) {
+      if (error) {
+        done(error);
       }
-    );
+
+      sessionToken = response.toJson().responseJson.data;
+      assert(sessionToken);
+
+      config.set('tune.reporting.auth_key', sessionToken);
+      config.set('tune.reporting.auth_type', 'session_token');
+
+      client = new TuneServiceClient(
+        'account/users',
+        'find',
+        sessionToken,
+        'session_token',
+        {
+          'limit' : 5,
+          'filter' : "(first_name LIKE '%a%')"
+        }
+      );
+
+      done();
+    });
   });
 
   describe('check instance', function () {
+    var
+      authKey,
+      authType;
+
     it('client created', function (done) {
       assert(client);
       done();
@@ -76,8 +99,12 @@ describe('test TuneServiceClient', function () {
       expect(client.getRequest().getAction()).to.be.not.empty;
       done();
     });
-    it('api key', function (done) {
-      assert(apiKey);
+    it('session_token', function (done) {
+      authKey = config.get('tune.reporting.auth_key');
+      authType = config.get('tune.reporting.auth_type');
+      assert(authKey);
+      assert(authType);
+      assert(authType == 'session_token');
       done();
     });
   });
