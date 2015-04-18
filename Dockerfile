@@ -31,7 +31,7 @@ RUN mkdir -p /data/tune-reporting-node && \
   
 COPY . /data/tune-reporting-node
 
-RUN ls -al
+RUN ls -al /data/tune-reporting-node
 
 ENV APPLICATION_MODE all
 ENV NODE_ENV test
