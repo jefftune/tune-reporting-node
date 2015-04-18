@@ -19,7 +19,6 @@ RUN curl -sL https://rpm.nodesource.com/setup | bash - && \
   
 # Install Node.js and npm
 RUN     yum install -y npm
-RUN     yum install -y nodejs
 
 RUN npm --version
 
