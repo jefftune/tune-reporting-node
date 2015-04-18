@@ -42,8 +42,10 @@ describe('test TuneServiceClient', function () {
     client;
 
   before(function (done) {
-    apiKey = process.env.TUNE_REPORTING_API_KEY;
-    assert(apiKey);
+    apiKey = process.env.API_KEY;
+    expect(apiKey).to.be.not.null;
+    expect(apiKey).to.be.a('string');
+    expect(apiKey).to.be.not.empty;
 
     config.set('tune.reporting.auth_key', apiKey);
     config.set('tune.reporting.auth_type', 'api_key');

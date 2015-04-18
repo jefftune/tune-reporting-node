@@ -35,7 +35,6 @@ require('../lib/helpers/Date');
 
 try {
   var
-    apiKey,
     authKey = config.get('tune.reporting.auth_key'),
     authType = config.get('tune.reporting.auth_type'),
     sessionAuthenticate = new SessionAuthenticate(),
@@ -62,7 +61,6 @@ try {
       'authType'
     );
   }
-  apiKey = authKey;
 
   async.series({
     taskStartExample: function (next) {
@@ -80,21 +78,24 @@ try {
       console.log('==========================================================');
       console.log('\n');
 
-      sessionAuthenticate.getSessionToken(apiKey, function (error, response) {
-        if (error) {
-          return next(error);
-        }
+      if (authType == 'api_key') {
+        sessionAuthenticate.getSessionToken(authKey, function (error, response) {
+          if (error) {
+            return next(error);
+          }
 
-        console.log(' Status: "success"');
-        sessionToken = response.getData();
-        console.log(' session_token:');
-        console.log(sessionToken);
+          console.log(' Status: "success"');
 
-        config.set('tune.reporting.auth_key', sessionToken);
-        config.set('tune.reporting.auth_type', 'session_token');
+          sessionToken = response.getData();
+          console.log(' session_token:');
+          console.log(sessionToken);
 
-        return next();
-      });
+          config.set('tune.reporting.auth_key', sessionToken);
+          config.set('tune.reporting.auth_type', 'session_token');
+
+          return next();
+        });
+      }
     },
     taskCount: function (next) {
       console.log('\n');
