@@ -20,15 +20,12 @@ RUN curl -sL https://rpm.nodesource.com/setup | bash - && \
 # Install Node.js and npm
 RUN     yum install -y npm
 RUN     yum install -y nodejs
-RUN     yum install -y chai
-RUN     yum install -y convict
-RUN     yum install -y mocha
-RUN     yum install -y should
-RUN     yum install -y sinon
 
 RUN npm --version
 
 RUN node --version
+
+RUN npm install
 
 ## Make company standard paths
 RUN mkdir -p /data/tune-reporting-node && \
