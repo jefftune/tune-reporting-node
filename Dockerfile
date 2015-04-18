@@ -25,8 +25,6 @@ RUN npm --version
 
 RUN node --version
 
-RUN npm install
-
 ## Make company standard paths
 RUN mkdir -p /data/tune-reporting-node && \
   mkdir -p /var/has/data/tune-reporting-node
