@@ -34,4 +34,4 @@ WORKDIR /data/tune-reporting-node
 
 RUN npm install
 
-RUN make test api_key=demoadv
+RUN make test api_key=b951b30cc17b6a77dad4f1ef1471bd5d

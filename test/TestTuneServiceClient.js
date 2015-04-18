@@ -35,6 +35,7 @@ var
   clock;
 
 describe('test TuneServiceClient', function () {
+  this.timeout(10000);
   var
     apiKey,
     sessionAuthenticate = new SessionAuthenticate(),
