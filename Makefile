@@ -55,8 +55,7 @@ test-install:
 	npm install sinon --save
 
 test:
-	env NODE_ENV=test TUNE_REPORTING_API_KEY=$(api_key)
-	./node_modules/.bin/mocha
+	env NODE_ENV=test TUNE_REPORTING_API_KEY=$(api_key) ./node_modules/.bin/mocha
 
 test-w:
 	env NODE_ENV=test TUNE_REPORTING_API_KEY=$(api_key) ./node_modules/.bin/mocha \
