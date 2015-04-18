@@ -32,10 +32,8 @@ COPY . /data/tune-reporting-node
 
 RUN ls -al /data/tune-reporting-node
 
-ENV APPLICATION_MODE all
-ENV NODE_ENV test
-ENV TUNE_REPORTING_API_KEY demoadv
+RUN cd /data/tune-reporting-node
 
-WORKDIR /data/tune-reporting-node
+RUN npm install
 
-CMD ["env", "./node_modules/.bin/mocha"]
+RUN env NODE_ENV=test TUNE_REPORTING_API_KEY=demoadv ./node_modules/.bin/mocha
