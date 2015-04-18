@@ -15,10 +15,16 @@ RUN yum -y update && \
 
 ## Dependency Installation
 RUN curl -sL https://rpm.nodesource.com/setup | bash - && \
-  yum install -y which redhat-lsb-core wget nodejs gcc-c++ make chai convict mocha should sinon kernel-devel
+  yum install -y which redhat-lsb-core wget nodejs gcc-c++ make kernel-devel
   
 # Install Node.js and npm
 RUN     yum install -y npm
+RUN     yum install -y nodejs
+RUN     yum install -y chai
+RUN     yum install -y convict
+RUN     yum install -y mocha
+RUN     yum install -y should
+RUN     yum install -y sinon
 
 RUN npm --version
 
@@ -30,12 +36,11 @@ RUN mkdir -p /data/tune-reporting-node && \
   
 COPY . /data/tune-reporting-node
 
+RUN ls -al
+
 ENV APPLICATION_MODE all
 ENV NODE_ENV test
 ENV TUNE_REPORTING_API_KEY demoadv
-
-RUN ls -al
-RUN ls -al /data/
 
 WORKDIR /data/tune-reporting-node
 
