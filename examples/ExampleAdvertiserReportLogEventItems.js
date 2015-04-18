@@ -10,7 +10,7 @@
  * @author    Jeff Tanner <jefft@tune.com>
  * @copyright 2015 TUNE, Inc. (http://www.tune.com)
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
- * @version   $Date: 2015-04-05 13:42:19 $
+ * @version   $Date: 2015-04-16 15:41:32 $
  * @link      http://developers.mobileapptracking.com @endlink
  */
 "use strict";
@@ -24,18 +24,17 @@ var
   stackTrace = require('stack-trace'),
   async = require('async'),
   AdvertiserReportLogEventItems = tuneReporting.api.AdvertiserReportLogEventItems,
-  SessionAuthenticate = tuneReporting.api.SessionAuthenticate,
   EndpointBase = tuneReporting.base.endpoints.EndpointBase,
   InvalidArgument = tuneReporting.helpers.InvalidArgument,
   ReportReaderCSV = tuneReporting.helpers.ReportReaderCSV,
   ReportReaderJSON = tuneReporting.helpers.ReportReaderJSON,
+  SessionAuthenticate = tuneReporting.api.SessionAuthenticate,
   response;
 
 require('../lib/helpers/Date');
 
 try {
   var
-    apiKey,
     authKey = config.get('tune.reporting.auth_key'),
     authType = config.get('tune.reporting.auth_type'),
     sessionAuthenticate = new SessionAuthenticate(),
@@ -62,7 +61,6 @@ try {
       'authType'
     );
   }
-  apiKey = authKey;
 
   async.series({
     taskStartExample: function (next) {
@@ -80,18 +78,24 @@ try {
       console.log('==========================================================');
       console.log('\n');
 
-      sessionAuthenticate.getSessionToken(apiKey, function (error, response) {
-        if (error) {
-          return next(error);
-        }
+      if (authType == 'api_key') {
+        sessionAuthenticate.getSessionToken(authKey, function (error, response) {
+          if (error) {
+            return next(error);
+          }
 
-        console.log(' Status: "success"');
+          console.log(' Status: "success"');
 
-        sessionToken = response.getData();
-        console.log(' session_token:');
-        console.log(sessionToken);
-        return next();
-      });
+          sessionToken = response.getData();
+          console.log(' session_token:');
+          console.log(sessionToken);
+
+          config.set('tune.reporting.auth_key', sessionToken);
+          config.set('tune.reporting.auth_type', 'session_token');
+
+          return next();
+        });
+      }
     },
     taskFieldsRecommended: function (next) {
       console.log('\n');

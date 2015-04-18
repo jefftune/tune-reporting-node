@@ -46,6 +46,9 @@ describe('test AdvertiserReportLogEventItems', function () {
   before(function (done) {
     apiKey = process.env.API_KEY;
     expect(apiKey).to.be.not.null;
+    expect(apiKey).to.be.a('string');
+    expect(apiKey).to.be.not.empty;
+
     advertiserReport = new AdvertiserReportLogEventItems();
 
     sessionAuthenticate.getSessionToken(apiKey, function (error, response) {
@@ -53,7 +56,7 @@ describe('test AdvertiserReportLogEventItems', function () {
         done(error);
       }
 
-	  expect(response.getHttpCode()).eql(200);
+      expect(response.getHttpCode()).eql(200);
       sessionToken = response.toJson().responseJson.data;
       
       expect(sessionToken).to.be.not.null;

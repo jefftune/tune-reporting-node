@@ -46,6 +46,9 @@ describe('test AdvertiserReportLogClicks', function () {
   before(function (done) {
     apiKey = process.env.API_KEY;
     expect(apiKey).to.be.not.null;
+    expect(apiKey).to.be.a('string');
+    expect(apiKey).to.be.not.empty;
+
     advertiserReport = new AdvertiserReportLogClicks();
 
     sessionAuthenticate.getSessionToken(apiKey, function (error, response) {
@@ -53,9 +56,9 @@ describe('test AdvertiserReportLogClicks', function () {
         done(error);
       }
 
-	  expect(response.getHttpCode()).eql(200);
+      expect(response.getHttpCode()).eql(200);
       sessionToken = response.toJson().responseJson.data;
-      
+
       expect(sessionToken).to.be.not.null;
 
       config.set('tune.reporting.auth_key', sessionToken);
@@ -64,7 +67,7 @@ describe('test AdvertiserReportLogClicks', function () {
       done();
     });
   });
-  
+
   it('report created', function (done) {
     expect(advertiserReport).to.be.not.null;
     done();
