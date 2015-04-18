@@ -30,8 +30,12 @@ describe('test AdvertiserReportCohortRetention', function () {
   this.timeout(60000);
   var
     advertiserReport,
-    apiKey,
     csvJobId,
+    apiKey,
+    authKey,
+    authType,
+    sessionAuthenticate = new SessionAuthenticate(),
+    sessionToken,
 
     // Set start date to the start of one week ago.
     startDate = new Date().setOneWeekAgo().setStartTime().getIsoDateTime(),
@@ -40,11 +44,51 @@ describe('test AdvertiserReportCohortRetention', function () {
     strResponseTimezone = 'America/Los_Angeles',
     arrayFieldsRecommended = null;
 
-  before(function () {
+  before(function (done) {
     apiKey = process.env.API_KEY;
-    config.set('tune.reporting.auth_key', apiKey);
-    config.set('tune.reporting.auth_type', 'api_key');
+    expect(apiKey).to.be.not.null;
     advertiserReport = new AdvertiserReportCohortRetention();
+
+    sessionAuthenticate.getSessionToken(apiKey, function (error, response) {
+      if (error) {
+        done(error);
+      }
+
+	  expect(response.getHttpCode()).eql(200);
+      sessionToken = response.toJson().responseJson.data;
+      
+      expect(sessionToken).to.be.not.null;
+
+      config.set('tune.reporting.auth_key', sessionToken);
+      config.set('tune.reporting.auth_type', 'session_token');
+
+      done();
+    });
+  });
+  
+  it('report created', function (done) {
+    expect(advertiserReport).to.be.not.null;
+    done();
+  });
+
+  it('session_token', function (done) {
+    authKey = config.get('tune.reporting.auth_key');
+    authType = config.get('tune.reporting.auth_type');
+    expect(authKey).to.be.not.null;
+    expect(authType).to.be.not.null;
+    expect(authType).to.equal('session_token');
+    done();
+  });
+
+  it('fields all', function (done) {
+    advertiserReport.getFields(
+      EndpointBase.TUNE_FIELDS_ALL,
+      function (error, response) {
+        expect(error).to.be.null;
+        expect(response).to.be.not.null;
+        done();
+      }
+    );
   });
 
   it('fields recommended', function (done) {
@@ -61,7 +105,6 @@ describe('test AdvertiserReportCohortRetention', function () {
   });
 
   it('count', function (done) {
-
     var
       mapParams = {
         'start_date': startDate,
@@ -133,6 +176,7 @@ describe('test AdvertiserReportCohortRetention', function () {
       function (error, response) {
         expect(error).to.be.null;
         expect(response).to.be.not.null;
+        expect(response.getHttpCode()).eql(200);
 
         csvJobId = response.toJson().responseJson.data.job_id;
         expect(csvJobId).to.be.not.null;
@@ -145,6 +189,10 @@ describe('test AdvertiserReportCohortRetention', function () {
   });
 
   it('statusCsvReport', function (done) {
+    expect(csvJobId).to.be.not.null;
+    expect(csvJobId).to.be.a('string');
+    expect(csvJobId).to.be.not.empty;
+
     advertiserReport.status(
       csvJobId,
       function (error, response) {
