@@ -34,4 +34,7 @@ WORKDIR /data/tune-reporting-node
 
 RUN npm install
 
-RUN env NODE_ENV=test TUNE_REPORTING_API_KEY=demoadv ./node_modules/.bin/mocha
+ENV NODE_ENV=test
+ENV TUNE_REPORTING_API_KEY=b951b30cc17b6a77dad4f1ef1471bd5d
+
+CMD[ "./node_modules/.bin/mocha" ]
