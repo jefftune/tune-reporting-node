@@ -24,17 +24,21 @@ var
   stackTrace = require('stack-trace'),
   async = require('async'),
   AdvertiserReportActuals = tuneReporting.api.AdvertiserReportActuals,
-  SessionAuthenticate = tuneReporting.api.SessionAuthenticate,
   EndpointBase = tuneReporting.base.endpoints.EndpointBase,
   InvalidArgument = tuneReporting.helpers.InvalidArgument,
   ReportReaderCSV = tuneReporting.helpers.ReportReaderCSV,
   ReportReaderJSON = tuneReporting.helpers.ReportReaderJSON,
+  SessionAuthenticate = tuneReporting.api.SessionAuthenticate,
   response;
 
 require('../lib/helpers/Date');
 
 try {
   var
+    authKey = config.get('tune.reporting.auth_key'),
+    authType = config.get('tune.reporting.auth_type'),
+    sessionAuthenticate = new SessionAuthenticate(),
+    sessionToken,
     advertiserReport = new AdvertiserReportActuals(),
 
     startDate = new Date().setOneWeekAgo().setStartTime().getIsoDateTime(),
@@ -47,6 +51,17 @@ try {
     jsonJobId = null,
     jsonReportUrl = null;
 
+  if (!authKey || !_.isString(authKey) || (0 === authKey.length)) {
+    throw new InvalidArgument(
+      'authKey'
+    );
+  }
+  if (!authType || !_.isString(authType) || (0 === authType.length)) {
+    throw new InvalidArgument(
+      'authType'
+    );
+  }
+
   async.series({
     taskStartExample: function (next) {
       console.log('\n');
@@ -57,23 +72,14 @@ try {
       next();
     },
     taskSessionToken: function (next) {
-      var
-        authKey = config.get('tune.reporting.auth_key'),
-        authType = config.get('tune.reporting.auth_type');
+      console.log('\n');
+      console.log('==========================================================');
+      console.log(' Get Session Token.                                       ');
+      console.log('==========================================================');
+      console.log('\n');
 
-      if ( 'api_key' === authType ) {
-        var
-          apiKey = authKey,
-          sessionAuthenticate = new SessionAuthenticate(),
-          sessionToken;
-
-        console.log('\n');
-        console.log('==========================================================');
-        console.log(' Get Session Token.                                       ');
-        console.log('==========================================================');
-        console.log('\n');
-
-        sessionAuthenticate.getSessionToken(apiKey, function (error, response) {
+      if (authType == 'api_key') {
+        sessionAuthenticate.getSessionToken(authKey, function (error, response) {
           if (error) {
             return next(error);
           }

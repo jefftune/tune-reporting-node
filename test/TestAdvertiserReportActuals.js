@@ -32,6 +32,10 @@ describe('test AdvertiserReportActuals', function () {
     advertiserReport,
     csvJobId,
     apiKey,
+    authKey,
+    authType,
+    sessionAuthenticate = new SessionAuthenticate(),
+    sessionToken,
 
     // Set start date to the start of one week ago.
     startDate = new Date().setOneWeekAgo().setStartTime().getIsoDateTime(),
@@ -40,11 +44,43 @@ describe('test AdvertiserReportActuals', function () {
     strResponseTimezone = 'America/Los_Angeles',
     arrayFieldsRecommended = null;
 
-  before(function () {
+  before(function (done) {
     apiKey = process.env.API_KEY;
-    config.set('tune.reporting.auth_key', apiKey);
-    config.set('tune.reporting.auth_type', 'api_key');
+    expect(apiKey).to.be.not.null;
+    expect(apiKey).to.be.a('string');
+    expect(apiKey).to.be.not.empty;
+
     advertiserReport = new AdvertiserReportActuals();
+
+    sessionAuthenticate.getSessionToken(apiKey, function (error, response) {
+      if (error) {
+        done(error);
+      }
+
+      expect(response.getHttpCode()).eql(200);
+      sessionToken = response.toJson().responseJson.data;
+      
+      expect(sessionToken).to.be.not.null;
+
+      config.set('tune.reporting.auth_key', sessionToken);
+      config.set('tune.reporting.auth_type', 'session_token');
+
+      done();
+    });
+  });
+  
+  it('report created', function (done) {
+    expect(advertiserReport).to.be.not.null;
+    done();
+  });
+
+  it('session_token', function (done) {
+    authKey = config.get('tune.reporting.auth_key');
+    authType = config.get('tune.reporting.auth_type');
+    expect(authKey).to.be.not.null;
+    expect(authType).to.be.not.null;
+    expect(authType).to.equal('session_token');
+    done();
   });
 
   it('fields all', function (done) {
@@ -72,7 +108,6 @@ describe('test AdvertiserReportActuals', function () {
   });
 
   it('count', function (done) {
-
     var
       mapParams = {
         'start_date': startDate,
@@ -87,12 +122,15 @@ describe('test AdvertiserReportActuals', function () {
       function (error, response) {
         expect(error).to.be.null;
         expect(response).to.be.not.null;
+        expect(response.getHttpCode()).eql(200);
         done();
       }
     );
   });
 
   it('find', function (done) {
+    expect(arrayFieldsRecommended).to.be.not.null;
+    expect(arrayFieldsRecommended).to.be.not.empty;
 
     var
       mapParams = {
@@ -113,6 +151,7 @@ describe('test AdvertiserReportActuals', function () {
       function (error, response) {
         expect(error).to.be.null;
         expect(response).to.be.not.null;
+        expect(response.getHttpCode()).eql(200);
         done();
       }
     );
@@ -163,6 +202,7 @@ describe('test AdvertiserReportActuals', function () {
       function (error, response) {
         expect(error).to.be.null;
         expect(response).to.be.not.null;
+        expect(response.getHttpCode()).eql(200);
 
         csvJobId = response.toJson().responseJson.data;
         expect(csvJobId).to.be.not.null;
@@ -175,11 +215,16 @@ describe('test AdvertiserReportActuals', function () {
   });
 
   it('statusCsvReport', function (done) {
+    expect(csvJobId).to.be.not.null;
+    expect(csvJobId).to.be.a('string');
+    expect(csvJobId).to.be.not.empty;
+
     advertiserReport.status(
       csvJobId,
       function (error, response) {
         expect(error).to.be.null;
         expect(response).to.be.not.null;
+        expect(response.getHttpCode()).eql(200);
         done();
       }
     );
