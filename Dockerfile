@@ -25,12 +25,3 @@ RUN yum install -y npm && \
     mkdir -p /var/has/data/tune-reporting-node
   
 COPY . /data/tune-reporting-node
-
-WORKDIR /data/tune-reporting-node
-
-RUN npm install
-
-ENV NODE_ENV=test
-ENV API_KEY=b951b30cc17b6a77dad4f1ef1471bd5d
-
-RUN ./node_modules/.bin/mocha
