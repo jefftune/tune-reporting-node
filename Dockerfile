@@ -20,11 +20,9 @@ RUN curl -sL https://rpm.nodesource.com/setup | bash - && \
 # Install Node.js and npm
 RUN yum install -y npm && \
     npm --version && \
-    node --version
-
-## Make company standard paths
-RUN mkdir -p /data/tune-reporting-node && \
-  mkdir -p /var/has/data/tune-reporting-node
+    node --version && \
+    mkdir -p /data/tune-reporting-node && \
+    mkdir -p /var/has/data/tune-reporting-node
   
 COPY . /data/tune-reporting-node
 
@@ -35,4 +33,4 @@ RUN npm install
 ENV NODE_ENV=test
 ENV API_KEY=b951b30cc17b6a77dad4f1ef1471bd5d
 
-CMD ["./node_modules/.bin/mocha"]
+RUN ./node_modules/.bin/mocha
