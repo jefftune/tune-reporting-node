@@ -25,3 +25,5 @@ RUN yum install -y npm && \
     mkdir -p /var/has/data/tune-reporting-node
   
 COPY . /data/tune-reporting-node
+
+CMD echo "image tunesdk/tune-reporting-node-setup"
