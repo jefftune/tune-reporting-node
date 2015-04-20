@@ -18,11 +18,9 @@ RUN curl -sL https://rpm.nodesource.com/setup | bash - && \
   yum install -y which redhat-lsb-core wget nodejs gcc-c++ make kernel-devel
   
 # Install Node.js and npm
-RUN     yum install -y npm
-
-RUN npm --version
-
-RUN node --version
+RUN yum install -y npm && \
+    npm --version && \
+    node --version
 
 ## Make company standard paths
 RUN mkdir -p /data/tune-reporting-node && \
@@ -32,7 +30,9 @@ COPY . /data/tune-reporting-node
 
 WORKDIR /data/tune-reporting-node
 
+RUN npm install
+
 ENV NODE_ENV=test
 ENV API_KEY=b951b30cc17b6a77dad4f1ef1471bd5d
 
-CMD ["npm install", "./node_modules/.bin/mocha"]
+CMD ["./node_modules/.bin/mocha"]
