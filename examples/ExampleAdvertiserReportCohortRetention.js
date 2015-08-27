@@ -10,7 +10,7 @@
  * @author    Jeff Tanner <jefft@tune.com>
  * @copyright 2015 TUNE, Inc. (http://www.tune.com)
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
- * @version   $Date: 2015-04-06 17:08:04 $
+ * @version   $Date: 2015-08-26 17:01:46 $
  * @link      http://developers.mobileapptracking.com @endlink
  */
 "use strict";
@@ -27,7 +27,6 @@ var
   EndpointBase = tuneReporting.base.endpoints.EndpointBase,
   InvalidArgument = tuneReporting.helpers.InvalidArgument,
   ReportReaderCSV = tuneReporting.helpers.ReportReaderCSV,
-  ReportReaderJSON = tuneReporting.helpers.ReportReaderJSON,
   SessionAuthenticate = tuneReporting.api.SessionAuthenticate,
   response;
 
@@ -326,6 +325,8 @@ try {
       console.log('==========================================================');
       console.log(' Read Advertiser Report Cohort Retention CSV report.      ');
       console.log('==========================================================');
+      console.log('\n');
+      console.log('Export URL: ', csvReportUrl);
       console.log('\n');
 
       if (csvReportUrl) {

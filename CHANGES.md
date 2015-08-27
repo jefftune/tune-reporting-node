@@ -122,3 +122,9 @@ Version 1.0.2
 --------------
 
 First production release on April 09, 2015
+
+
+Version 1.0.10
+--------------
+
+JSON is no longer supported as export file format. Only CSV.
