@@ -10,7 +10,7 @@
  * @author    Jeff Tanner <jefft@tune.com>
  * @copyright 2015 TUNE, Inc. (http://www.tune.com)
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
- * @version   $Date: 2015-04-10 11:10:41 $
+ * @version   $Date: 2015-08-26 17:01:46 $
  * @link      http://developers.mobileapptracking.com @endlink
  */
 
@@ -68,6 +68,7 @@ var config = convict({
         doc: "TUNE Reporting Authentication Type: api_key OR session_token.",
         format: String,
         default: "api_key",
+        env: "TUNE_REPORTING_AUTH_TYPE",
         arg: "tune_reporting_auth_type"
       },
       validate_fields: {

@@ -11,7 +11,7 @@
  * @author    Jeff Tanner <jefft@tune.com>
  * @copyright 2015 TUNE, Inc. (http://www.tune.com)
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
- * @version   $Date: 2015-04-07 15:04:18 $
+ * @version   $Date: 2015-08-26 17:01:46 $
  * @link      http://developers.mobileapptracking.com @endlink
  */
 "use strict";
@@ -58,7 +58,7 @@ describe('test AdvertiserReportLogEvents', function () {
 
       expect(response.getHttpCode()).eql(200);
       sessionToken = response.toJson().responseJson.data;
-      
+
       expect(sessionToken).to.be.not.null;
 
       config.set('tune.reporting.auth_key', sessionToken);
@@ -67,7 +67,7 @@ describe('test AdvertiserReportLogEvents', function () {
       done();
     });
   });
-  
+
   it('report created', function (done) {
     expect(advertiserReport).to.be.not.null;
     done();

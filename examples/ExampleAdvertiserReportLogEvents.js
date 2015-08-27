@@ -10,7 +10,7 @@
  * @author    Jeff Tanner <jefft@tune.com>
  * @copyright 2015 TUNE, Inc. (http://www.tune.com)
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
- * @version   $Date: 2015-04-05 13:42:19 $
+ * @version   $Date: 2015-08-26 17:01:46 $
  * @link      http://developers.mobileapptracking.com @endlink
  */
 "use strict";
@@ -27,7 +27,6 @@ var
   EndpointBase = tuneReporting.base.endpoints.EndpointBase,
   InvalidArgument = tuneReporting.helpers.InvalidArgument,
   ReportReaderCSV = tuneReporting.helpers.ReportReaderCSV,
-  ReportReaderJSON = tuneReporting.helpers.ReportReaderJSON,
   SessionAuthenticate = tuneReporting.api.SessionAuthenticate,
   response;
 
@@ -307,6 +306,8 @@ try {
       console.log(' Read Advertiser Report Log Events CSV report.            ');
       console.log('==========================================================');
       console.log('\n');
+      console.log('Export URL: ', csvReportUrl);
+      console.log('\n');
 
       if (csvReportUrl) {
         var
@@ -323,137 +324,6 @@ try {
         });
       } else {
         console.log(' Failed to fetch CSV Report URL.');
-      }
-    },
-    taskExportJsonReport: function (next) {
-      console.log('\n');
-      console.log('==========================================================');
-      console.log(' Export Advertiser Report Log Events JSON report.         ');
-      console.log('==========================================================');
-      console.log('\n');
-
-      jsonJobId = undefined;
-
-      var
-        mapParams = {
-          'start_date': startDate,
-          'end_date': endDate,
-          'fields': arrayFieldsRecommended,
-          'filter': null,
-          'format': 'json',
-          'response_timezone': strResponseTimezone
-        };
-
-      advertiserReport.export(
-        mapParams,
-        function (error, response) {
-          if (error) {
-            return next(error);
-          }
-
-          if ((response.getHttpCode() !== 200) || (response.getErrors() !== null)) {
-            return next(response);
-          }
-
-          console.log(' Status: "success"');
-          console.log(' TuneServiceResponse:');
-          console.log(response.toJson().responseJson.data);
-
-          jsonJobId = response.toJson().responseJson.data;
-
-          console.log('\n');
-          console.log(util.format(' JSON Report Job ID: "%s"', jsonJobId));
-          return next();
-        }
-      );
-    },
-    taskStatusJsonReport: function (next) {
-      console.log('\n');
-      console.log('==========================================================');
-      console.log(' Status Advertiser Report Log Events JSON report.          ');
-      console.log('==========================================================');
-      console.log('\n');
-
-      advertiserReport.status(
-        jsonJobId,
-        function (error, response) {
-          if (error) {
-            return next(error);
-          }
-
-          if ((response.getHttpCode() !== 200) || (response.getErrors() !== null)) {
-            return next(response);
-          }
-
-          console.log(' Status: "success"');
-          var json = response.toJson();
-          console.log(json.responseJson.data);
-
-          return next();
-        }
-      );
-    },
-    taskFetchJsonReport: function (next) {
-      console.log('\n');
-      console.log('==========================================================');
-      console.log(' Fetch Advertiser Report Log Events JSON report.           ');
-      console.log('==========================================================');
-      console.log('\n');
-
-      jsonReportUrl = undefined;
-
-      advertiserReport.fetch(
-        jsonJobId,
-        function (error, response) {
-          if (error) {
-            return next(error);
-          }
-
-          if ((response.getHttpCode() !== 200) || (response.getErrors() !== null)) {
-            return next(response);
-          }
-
-          console.log(' Status: "success"');
-          console.log(' TuneServiceResponse:');
-          console.log(response.toJson().responseJson.data);
-
-          if (100 === response.toJson().responseJson.data.percent_complete) {
-            jsonReportUrl = advertiserReport.parseResponseReportUrl(response);
-
-            console.log('\n');
-            console.log(util.format(' JSON Report URL: "%s"', jsonReportUrl));
-          } else {
-            console.log(' Fetch JSON Report not completed:');
-            console.log(response.toJson().responseJson.data);
-          }
-
-          return next();
-        }
-      );
-    },
-    taskReadJsonReport: function (next) {
-
-      console.log('\n');
-      console.log('==========================================================');
-      console.log(' Read Advertiser Report Log Events JSON report.           ');
-      console.log('==========================================================');
-      console.log('\n');
-
-      if (jsonReportUrl) {
-        var
-          json_reader = new ReportReaderJSON(jsonReportUrl),
-          print_request = json_reader.prettyprint(5);
-
-        print_request.once('success', function onSuccess(response) {
-          console.log(response);
-          next();
-        });
-
-        print_request.once('error', function onError(response) {
-          return next(response);
-        });
-      } else {
-        console.log(' Failed to fetch JSON Report URL.');
       }
     },
     taskCountSessionToken: function (next) {
