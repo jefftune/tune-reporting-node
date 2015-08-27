@@ -1,8 +1,8 @@
 <h2>tune-reporting</h2>
 <h2>TUNE Reporting SDK for Node</h2>
 <h3>Incorporate TUNE Reporting services.</h3>
-<h4>Update:  $Date: 2015-08-26 17:01:46 $</h4>
-<h4>Version: 1.0.10</h4>
+<h4>Update:  $Date: 2015-08-26 17:15:38 $</h4>
+<h4>Version: 1.0.11</h4>
 ===
 
 <a id="TOP"></a>
@@ -36,22 +36,17 @@
             <li><a href="#sdk_install_config">Configuration</a></li>
         </ul>
     </li>
-
     <li><a href="#sdk_gendoc">SDK Generated Documentation</a>
         <ul>
             <li><a href="#sdk_gendoc_yuidoc">YUIdoc</a></li>
         </ul>
     </li>
-
     <li><a href="#sdk_advertiser_reporting_overview">Advertiser Reporting Overview</a>
     </li>
-
     <li><a href="#sdk_exporting_reports">Exporting Advertiser Reports</a>
     </li>
-
     <li><a href="#sdk_license">MIT License</a>
     </li>
-
     <li><a href="#sdk_issues">SDK Issues</a>
     </li>
 </ul>
