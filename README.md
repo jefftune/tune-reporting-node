@@ -1,8 +1,8 @@
 <h2>tune-reporting</h2>
 <h2>TUNE Reporting SDK for Node</h2>
 <h3>Incorporate TUNE Reporting services.</h3>
-<h4>Update:  $Date: 2015-08-26 17:15:38 $</h4>
-<h4>Version: 1.0.11</h4>
+<h4>Update:  $Date: 2015-12-11 22:34:11 $</h4>
+<h4>Version: 1.0.12</h4>
 ===
 
 <a id="TOP"></a>
@@ -242,6 +242,29 @@ and you're good to go!
 <img alt="Return to Top" src="https://raw.githubusercontent.com/MobileAppTracking/tune-reporting-node/master/docs/images/b_top.gif" border="0">
 </a>
 </p>
+
+<!-- SDK Code Samples -->
+
+<a id="sdk_code_samples" name="sdk_code_samples"></a>
+### SDK Code Samples
+
+<a id="sdk_code_samples_examples" name="sdk_code_samples_examples"></a>
+#### Examples
+
+Run the following script to view execution of all examples:
+
+```bash
+    make examples api_key=[API_KEY]
+```
+
+<a id="sdk_code_samples_unittests" name="sdk_code_samples_unittests"></a>
+#### Unittests
+
+Run the following script to view execution of all unittests:
+
+```bash
+    make tests api_key=[API_KEY]
+```
 
 <!-- Generated Documentation -->
 

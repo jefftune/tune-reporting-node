@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * ExampleAdvertiserReportCohortValue.js, Example of TUNE Reporting API.
+ * ExampleAdvertiserReportCohortValues.js, Example of TUNE Reporting API.
  *
  * @module examples
  * @main tune-reporting
@@ -10,7 +10,7 @@
  * @author    Jeff Tanner <jefft@tune.com>
  * @copyright 2015 TUNE, Inc. (http://www.tune.com)
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
- * @version   $Date: 2015-08-26 17:15:38 $
+ * @version   $Date: 2015-12-11 22:34:11 $
  * @link      http://developers.mobileapptracking.com @endlink
  */
 "use strict";
@@ -23,7 +23,7 @@ var
   async = require('async'),
   stackTrace = require('stack-trace'),
   async = require('async'),
-  AdvertiserReportCohortValue = tuneReporting.api.AdvertiserReportCohortValue,
+  AdvertiserReportCohortValues = tuneReporting.api.AdvertiserReportCohortValues,
   EndpointBase = tuneReporting.base.endpoints.EndpointBase,
   InvalidArgument = tuneReporting.helpers.InvalidArgument,
   ReportReaderCSV = tuneReporting.helpers.ReportReaderCSV,
@@ -38,7 +38,7 @@ try {
     authType = config.get('tune.reporting.auth_type'),
     sessionAuthenticate = new SessionAuthenticate(),
     sessionToken,
-    advertiserReport = new AdvertiserReportCohortValue(),
+    advertiserReport = new AdvertiserReportCohortValues(),
 
     startDate = new Date().setOneWeekAgo().setStartTime().getIsoDateTime(),
     endDate = new Date().setYesterday().setEndTime().getIsoDateTime(),

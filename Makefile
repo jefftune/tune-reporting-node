@@ -22,11 +22,10 @@
 #   THE SOFTWARE.
 #
 # category  TUNE_Reporting
-# package   tune.tests
 # author    Jeff Tanner <jefft@tune.com>
 # copyright 2014 TUNE, Inc. (http://www.tune.com)
 # license   http://opensource.org/licenses/MIT The MIT License (MIT)
-# version   $Date: 2015-04-10 11:10:41 $
+# version   $Date: 2015-12-11 22:34:11 $
 # link      http://developers.mobileapptracking.com/tune-api-sdks/
 #
 
@@ -45,7 +44,7 @@ examples:
 	node ./examples/ExampleAdvertiserReportLogPostbacks --env=test --tune_reporting_auth_key=$(api_key) --tune_reporting_auth_type=api_key
 	node ./examples/ExampleAdvertiserReportActuals --env=test --tune_reporting_auth_key=$(api_key) --tune_reporting_auth_type=api_key
 	node ./examples/ExampleAdvertiserReportCohortRetention --env=test --tune_reporting_auth_key=$(api_key) --tune_reporting_auth_type=api_key
-	node ./examples/ExampleAdvertiserReportCohortValue --env=test --tune_reporting_auth_key=$(api_key) --tune_reporting_auth_type=api_key
+	node ./examples/ExampleAdvertiserReportCohortValues --env=test --tune_reporting_auth_key=$(api_key) --tune_reporting_auth_type=api_key
 
 test-install:
 	npm install chai --save

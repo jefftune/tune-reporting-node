@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * TestAdvertiserReportCohortValue.js, Test of TUNE Reporting API.
+ * TestAdvertiserReportCohortValues.js, Test of TUNE Reporting API.
  *
  * @module tune-reporting
  * @submodule test
@@ -11,7 +11,7 @@
  * @author    Jeff Tanner <jefft@tune.com>
  * @copyright 2015 TUNE, Inc. (http://www.tune.com)
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
- * @version   $Date: 2015-08-26 17:15:38 $
+ * @version   $Date: 2015-12-11 22:34:11 $
  * @link      http://developers.mobileapptracking.com @endlink
  */
 "use strict";
@@ -21,12 +21,12 @@ require('../lib/helpers/Date');
 var
   config = require('../config.js'),
   tuneReporting = require('../lib'),
-  AdvertiserReportCohortValue = tuneReporting.api.AdvertiserReportCohortValue,
+  AdvertiserReportCohortValues = tuneReporting.api.AdvertiserReportCohortValues,
   EndpointBase = tuneReporting.base.endpoints.EndpointBase,
   SessionAuthenticate = tuneReporting.api.SessionAuthenticate,
   expect = require('chai').expect;
 
-describe('test AdvertiserReportCohortValue', function () {
+describe('test AdvertiserReportCohortValues', function () {
   this.timeout(60000);
   var
     advertiserReport,
@@ -51,7 +51,7 @@ describe('test AdvertiserReportCohortValue', function () {
     expect(apiKey).to.be.a('string');
     expect(apiKey).to.be.not.empty;
 
-    advertiserReport = new AdvertiserReportCohortValue();
+    advertiserReport = new AdvertiserReportCohortValues();
 
     sessionAuthenticate.getSessionToken(apiKey, function (error, response) {
       if (error) {
@@ -156,7 +156,7 @@ describe('test AdvertiserReportCohortValue', function () {
       function (error, response) {
         expect(error).to.be.null;
         expect(response).to.be.not.null;
-        expect(response.getHttpCode()).eql(200);
+        expect(response.getHttpCode()).eql(200);AdvertiserReportCohortValues
         done();
       }
     );
