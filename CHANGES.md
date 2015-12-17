@@ -1,7 +1,7 @@
 <h2>tune-reporting Change Log</h2>
 <h2>TUNE Reporting SDK for Node.js</h2>
 <h3>Incorporate TUNE Reporting services.</h3>
-<h4>Update:  $Date: 2015-08-26 17:15:38 $</h4>
+<h4>Update:  $Date: 2015-12-11 22:34:11 $</h4>
 =======================
 
 Here you can see the full list of changes between each tune-api-php release.
@@ -134,3 +134,9 @@ Version 1.0.11
 --------------
 
 npm documentation cleanup.
+
+
+Version 1.0.12
+--------------
+
+Retention

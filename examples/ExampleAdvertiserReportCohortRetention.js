@@ -10,7 +10,7 @@
  * @author    Jeff Tanner <jefft@tune.com>
  * @copyright 2015 TUNE, Inc. (http://www.tune.com)
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
- * @version   $Date: 2015-08-26 17:15:38 $
+ * @version   $Date: 2015-12-11 22:34:11 $
  * @link      http://developers.mobileapptracking.com @endlink
  */
 "use strict";
@@ -129,8 +129,9 @@ try {
         mapParams = {
           'start_date': startDate,
           'end_date': endDate,
-          'cohort_type': 'click',
+          'cohort_type': 'install',
           'cohort_interval': 'year_day',
+          'retention_measure': 'rolling_opens',
           'group': 'site_id,install_publisher_id',
           'filter': '(install_publisher_id > 0)',
           'response_timezone': strResponseTimezone
@@ -172,8 +173,9 @@ try {
         mapParams = {
           'start_date': startDate,
           'end_date': endDate,
-          'cohort_type': 'click',
+          'cohort_type': 'install',
           'cohort_interval': 'year_day',
+          'retention_measure': 'rolling_opens',
           'aggregation_type': 'cumulative',
           'group': 'site_id,install_publisher_id',
           'fields': arrayFieldsRecommended,
@@ -216,8 +218,9 @@ try {
         mapParams = {
           'start_date': startDate,
           'end_date': endDate,
-          'cohort_type': 'click',
+          'cohort_type': 'install',
           'cohort_interval': 'year_day',
+          'retention_measure': 'rolling_opens',
           'aggregation_type': 'cumulative',
           'group': 'site_id,install_publisher_id',
           'fields': arrayFieldsRecommended,
